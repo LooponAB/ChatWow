@@ -21,7 +21,13 @@
                             <outlet property="delegate" destination="ZeL-1d-7ar" id="lgG-3q-zHe"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="bV9-Zx-OKW"/>
+                    <navigationItem key="navigationItem" id="bV9-Zx-OKW">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="wx8-Ix-dOJ">
+                            <connections>
+                                <action selector="addMessages:" destination="ZeL-1d-7ar" id="5S5-4T-XQI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AMN-hy-q7x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

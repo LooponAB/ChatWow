@@ -59,7 +59,7 @@ public class ChatWowViewController: UITableViewController
 
 extension ChatWowViewController // Chat interface
 {
-	func insertMessageCount(newMessages count: Int)
+	func insertMessageCount(newMessages count: Int, scrollToBottom: Bool = false)
 	{
 		guard let total = dataSource?.numberOfMessages(in: self) else
 		{
@@ -73,7 +73,19 @@ extension ChatWowViewController // Chat interface
 			indexPaths.append(IndexPath(row: i, section: 0))
 		}
 
-		tableView.insertRows(at: indexPaths, with: .right)
+		tableView.insertRows(at: indexPaths, with: .left)
+
+		if scrollToBottom
+		{
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+				self.scrollToBottom()
+			})
+		}
+	}
+
+	func scrollToBottom()
+	{
+		tableView.scrollToRow(at: indexPath(for: 0), at: .bottom, animated: true)
 	}
 }
 
@@ -84,6 +96,11 @@ extension ChatWowViewController
 	private func chatMessageIndex(for indexPath: IndexPath) -> Int
 	{
 		return cachedCount - indexPath.row - 1
+	}
+
+	private func indexPath(for messageIndex: Int) -> IndexPath
+	{
+		return IndexPath(row: (messageIndex + 1 - cachedCount) * -1, section: 0)
 	}
 
 	public override func numberOfSections(in tableView: UITableView) -> Int

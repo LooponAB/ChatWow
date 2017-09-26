@@ -28,6 +28,14 @@ class ChatViewController: ChatWowViewController
 			return msg1.date > msg2.date
 		}
 	}
+
+	@IBAction func addMessages(_ sender: Any)
+	{
+		var newMessages = ["A new message", "Another new message", "A message", "Oh hai."]
+
+		chats.insert(ChatTextMessage(text: newMessages[Int(arc4random()) % newMessages.count], side: (arc4random() % 2) == 0 ? .mine : .theirs, date: Date()), at: 0)
+		insertMessageCount(newMessages: 1, scrollToBottom: true)
+	}
 }
 
 extension ChatViewController: ChatWowDataSource
