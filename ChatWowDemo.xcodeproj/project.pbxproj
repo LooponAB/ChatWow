@@ -8,20 +8,90 @@
 
 /* Begin PBXBuildFile section */
 		0D03D47C1F7A5C99009FF81E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D03D47B1F7A5C99009FF81E /* AppDelegate.swift */; };
-		0D03D47E1F7A5C99009FF81E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D03D47D1F7A5C99009FF81E /* ViewController.swift */; };
+		0D03D47E1F7A5C99009FF81E /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D03D47D1F7A5C99009FF81E /* ChatViewController.swift */; };
 		0D03D4811F7A5C99009FF81E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D03D47F1F7A5C99009FF81E /* Main.storyboard */; };
 		0D03D4831F7A5C99009FF81E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D03D4821F7A5C99009FF81E /* Assets.xcassets */; };
 		0D03D4861F7A5C99009FF81E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D03D4841F7A5C99009FF81E /* LaunchScreen.storyboard */; };
+		0D03D49B1F7A5CB4009FF81E /* ChatWow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D03D4921F7A5CB4009FF81E /* ChatWow.framework */; };
+		0D03D4A21F7A5CB4009FF81E /* ChatWowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D03D4A11F7A5CB4009FF81E /* ChatWowTests.swift */; };
+		0D03D4A41F7A5CB4009FF81E /* ChatWow.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D03D4941F7A5CB4009FF81E /* ChatWow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0D03D4A71F7A5CB4009FF81E /* ChatWow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D03D4921F7A5CB4009FF81E /* ChatWow.framework */; };
+		0D03D4A81F7A5CB4009FF81E /* ChatWow.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0D03D4921F7A5CB4009FF81E /* ChatWow.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0D03D4B21F7A5CD8009FF81E /* ChatWowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D03D4B01F7A5CD8009FF81E /* ChatWowViewController.swift */; };
+		0D4A6FBE1F7A6A6B00731719 /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4A6FBD1F7A6A6B00731719 /* ChatMessageView.swift */; };
+		0D4A6FBF1F7A6A6B00731719 /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4A6FBD1F7A6A6B00731719 /* ChatMessageView.swift */; };
+		0D4A6FC11F7A85FA00731719 /* ChatMessageMine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4A6FC01F7A85FA00731719 /* ChatMessageMine.xib */; };
+		0D4A6FC21F7A85FA00731719 /* ChatMessageMine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4A6FC01F7A85FA00731719 /* ChatMessageMine.xib */; };
+		0D4A6FC41F7A868A00731719 /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4A6FC31F7A868A00731719 /* ChatBubbleView.swift */; };
+		0D4A6FC51F7A868A00731719 /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4A6FC31F7A868A00731719 /* ChatBubbleView.swift */; };
+		0D4A6FC81F7A964900731719 /* ChatWowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D03D4B01F7A5CD8009FF81E /* ChatWowViewController.swift */; };
+		0D4A6FCA1F7AA05000731719 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4A6FC91F7AA04F00731719 /* ChatMessage.swift */; };
+		0D4A6FCB1F7AA05000731719 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4A6FC91F7AA04F00731719 /* ChatMessage.swift */; };
+		0D4A6FCC1F7AA62200731719 /* ChatMessageTheirs.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4A6FC71F7A91CF00731719 /* ChatMessageTheirs.xib */; };
+		0D4A6FCD1F7AA62300731719 /* ChatMessageTheirs.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4A6FC71F7A91CF00731719 /* ChatMessageTheirs.xib */; };
+		0D4A6FD51F7AB88F00731719 /* ChatInfoLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4A6FD21F7AB88F00731719 /* ChatInfoLineCell.xib */; };
+		0D4A6FD61F7AB88F00731719 /* ChatInfoLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4A6FD21F7AB88F00731719 /* ChatInfoLineCell.xib */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0D03D49C1F7A5CB4009FF81E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0D03D4701F7A5C99009FF81E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0D03D4911F7A5CB4009FF81E;
+			remoteInfo = ChatWow;
+		};
+		0D03D49E1F7A5CB4009FF81E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0D03D4701F7A5C99009FF81E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0D03D4771F7A5C99009FF81E;
+			remoteInfo = ChatWowDemo;
+		};
+		0D03D4A51F7A5CB4009FF81E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0D03D4701F7A5C99009FF81E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0D03D4911F7A5CB4009FF81E;
+			remoteInfo = ChatWow;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0D03D4AC1F7A5CB4009FF81E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0D03D4A81F7A5CB4009FF81E /* ChatWow.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0D03D4781F7A5C99009FF81E /* ChatWowDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatWowDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D03D47B1F7A5C99009FF81E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0D03D47D1F7A5C99009FF81E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0D03D47D1F7A5C99009FF81E /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		0D03D4801F7A5C99009FF81E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0D03D4821F7A5C99009FF81E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D03D4851F7A5C99009FF81E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D03D4871F7A5C99009FF81E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D03D4921F7A5CB4009FF81E /* ChatWow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ChatWow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D03D4941F7A5CB4009FF81E /* ChatWow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatWow.h; sourceTree = "<group>"; };
+		0D03D4951F7A5CB4009FF81E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D03D49A1F7A5CB4009FF81E /* ChatWowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatWowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D03D4A11F7A5CB4009FF81E /* ChatWowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWowTests.swift; sourceTree = "<group>"; };
+		0D03D4A31F7A5CB4009FF81E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D03D4B01F7A5CD8009FF81E /* ChatWowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWowViewController.swift; sourceTree = "<group>"; };
+		0D4A6FBD1F7A6A6B00731719 /* ChatMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageView.swift; sourceTree = "<group>"; };
+		0D4A6FC01F7A85FA00731719 /* ChatMessageMine.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMessageMine.xib; sourceTree = "<group>"; };
+		0D4A6FC31F7A868A00731719 /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
+		0D4A6FC71F7A91CF00731719 /* ChatMessageTheirs.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMessageTheirs.xib; sourceTree = "<group>"; };
+		0D4A6FC91F7AA04F00731719 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		0D4A6FD21F7AB88F00731719 /* ChatInfoLineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatInfoLineCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +99,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D03D4A71F7A5CB4009FF81E /* ChatWow.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D03D48E1F7A5CB4009FF81E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D03D4971F7A5CB4009FF81E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D03D49B1F7A5CB4009FF81E /* ChatWow.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +124,8 @@
 		0D03D46F1F7A5C99009FF81E = {
 			isa = PBXGroup;
 			children = (
+				0D03D4931F7A5CB4009FF81E /* ChatWow */,
+				0D03D4A01F7A5CB4009FF81E /* ChatWowTests */,
 				0D03D47A1F7A5C99009FF81E /* ChatWowDemo */,
 				0D03D4791F7A5C99009FF81E /* Products */,
 			);
@@ -47,6 +135,8 @@
 			isa = PBXGroup;
 			children = (
 				0D03D4781F7A5C99009FF81E /* ChatWowDemo.app */,
+				0D03D4921F7A5CB4009FF81E /* ChatWow.framework */,
+				0D03D49A1F7A5CB4009FF81E /* ChatWowTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -55,7 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				0D03D47B1F7A5C99009FF81E /* AppDelegate.swift */,
-				0D03D47D1F7A5C99009FF81E /* ViewController.swift */,
+				0D03D47D1F7A5C99009FF81E /* ChatViewController.swift */,
 				0D03D47F1F7A5C99009FF81E /* Main.storyboard */,
 				0D03D4821F7A5C99009FF81E /* Assets.xcassets */,
 				0D03D4841F7A5C99009FF81E /* LaunchScreen.storyboard */,
@@ -64,7 +154,43 @@
 			path = ChatWowDemo;
 			sourceTree = "<group>";
 		};
+		0D03D4931F7A5CB4009FF81E /* ChatWow */ = {
+			isa = PBXGroup;
+			children = (
+				0D03D4941F7A5CB4009FF81E /* ChatWow.h */,
+				0D03D4951F7A5CB4009FF81E /* Info.plist */,
+				0D03D4B01F7A5CD8009FF81E /* ChatWowViewController.swift */,
+				0D4A6FC91F7AA04F00731719 /* ChatMessage.swift */,
+				0D4A6FBD1F7A6A6B00731719 /* ChatMessageView.swift */,
+				0D4A6FC31F7A868A00731719 /* ChatBubbleView.swift */,
+				0D4A6FC01F7A85FA00731719 /* ChatMessageMine.xib */,
+				0D4A6FC71F7A91CF00731719 /* ChatMessageTheirs.xib */,
+				0D4A6FD21F7AB88F00731719 /* ChatInfoLineCell.xib */,
+			);
+			path = ChatWow;
+			sourceTree = "<group>";
+		};
+		0D03D4A01F7A5CB4009FF81E /* ChatWowTests */ = {
+			isa = PBXGroup;
+			children = (
+				0D03D4A11F7A5CB4009FF81E /* ChatWowTests.swift */,
+				0D03D4A31F7A5CB4009FF81E /* Info.plist */,
+			);
+			path = ChatWowTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		0D03D48F1F7A5CB4009FF81E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D03D4A41F7A5CB4009FF81E /* ChatWow.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		0D03D4771F7A5C99009FF81E /* ChatWowDemo */ = {
@@ -74,15 +200,54 @@
 				0D03D4741F7A5C99009FF81E /* Sources */,
 				0D03D4751F7A5C99009FF81E /* Frameworks */,
 				0D03D4761F7A5C99009FF81E /* Resources */,
+				0D03D4AC1F7A5CB4009FF81E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0D03D4A61F7A5CB4009FF81E /* PBXTargetDependency */,
 			);
 			name = ChatWowDemo;
 			productName = ChatWowDemo;
 			productReference = 0D03D4781F7A5C99009FF81E /* ChatWowDemo.app */;
 			productType = "com.apple.product-type.application";
+		};
+		0D03D4911F7A5CB4009FF81E /* ChatWow */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0D03D4A91F7A5CB4009FF81E /* Build configuration list for PBXNativeTarget "ChatWow" */;
+			buildPhases = (
+				0D03D48D1F7A5CB4009FF81E /* Sources */,
+				0D03D48E1F7A5CB4009FF81E /* Frameworks */,
+				0D03D48F1F7A5CB4009FF81E /* Headers */,
+				0D03D4901F7A5CB4009FF81E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChatWow;
+			productName = ChatWow;
+			productReference = 0D03D4921F7A5CB4009FF81E /* ChatWow.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		0D03D4991F7A5CB4009FF81E /* ChatWowTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0D03D4AD1F7A5CB4009FF81E /* Build configuration list for PBXNativeTarget "ChatWowTests" */;
+			buildPhases = (
+				0D03D4961F7A5CB4009FF81E /* Sources */,
+				0D03D4971F7A5CB4009FF81E /* Frameworks */,
+				0D03D4981F7A5CB4009FF81E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0D03D49D1F7A5CB4009FF81E /* PBXTargetDependency */,
+				0D03D49F1F7A5CB4009FF81E /* PBXTargetDependency */,
+			);
+			name = ChatWowTests;
+			productName = ChatWowTests;
+			productReference = 0D03D49A1F7A5CB4009FF81E /* ChatWowTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -97,6 +262,16 @@
 					0D03D4771F7A5C99009FF81E = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+					};
+					0D03D4911F7A5CB4009FF81E = {
+						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
+					};
+					0D03D4991F7A5CB4009FF81E = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 0D03D4771F7A5C99009FF81E;
 					};
 				};
 			};
@@ -114,6 +289,8 @@
 			projectRoot = "";
 			targets = (
 				0D03D4771F7A5C99009FF81E /* ChatWowDemo */,
+				0D03D4911F7A5CB4009FF81E /* ChatWow */,
+				0D03D4991F7A5CB4009FF81E /* ChatWowTests */,
 			);
 		};
 /* End PBXProject section */
@@ -124,8 +301,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D03D4861F7A5C99009FF81E /* LaunchScreen.storyboard in Resources */,
+				0D4A6FD51F7AB88F00731719 /* ChatInfoLineCell.xib in Resources */,
 				0D03D4831F7A5C99009FF81E /* Assets.xcassets in Resources */,
+				0D4A6FCD1F7AA62300731719 /* ChatMessageTheirs.xib in Resources */,
+				0D4A6FC11F7A85FA00731719 /* ChatMessageMine.xib in Resources */,
 				0D03D4811F7A5C99009FF81E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D03D4901F7A5CB4009FF81E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D4A6FCC1F7AA62200731719 /* ChatMessageTheirs.xib in Resources */,
+				0D4A6FD61F7AB88F00731719 /* ChatInfoLineCell.xib in Resources */,
+				0D4A6FC21F7A85FA00731719 /* ChatMessageMine.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D03D4981F7A5CB4009FF81E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,12 +333,53 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0D03D47E1F7A5C99009FF81E /* ViewController.swift in Sources */,
+				0D4A6FBE1F7A6A6B00731719 /* ChatMessageView.swift in Sources */,
+				0D03D47E1F7A5C99009FF81E /* ChatViewController.swift in Sources */,
 				0D03D47C1F7A5C99009FF81E /* AppDelegate.swift in Sources */,
+				0D4A6FCA1F7AA05000731719 /* ChatMessage.swift in Sources */,
+				0D4A6FC81F7A964900731719 /* ChatWowViewController.swift in Sources */,
+				0D4A6FC41F7A868A00731719 /* ChatBubbleView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D03D48D1F7A5CB4009FF81E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D4A6FC51F7A868A00731719 /* ChatBubbleView.swift in Sources */,
+				0D4A6FCB1F7AA05000731719 /* ChatMessage.swift in Sources */,
+				0D4A6FBF1F7A6A6B00731719 /* ChatMessageView.swift in Sources */,
+				0D03D4B21F7A5CD8009FF81E /* ChatWowViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D03D4961F7A5CB4009FF81E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D03D4A21F7A5CB4009FF81E /* ChatWowTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0D03D49D1F7A5CB4009FF81E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0D03D4911F7A5CB4009FF81E /* ChatWow */;
+			targetProxy = 0D03D49C1F7A5CB4009FF81E /* PBXContainerItemProxy */;
+		};
+		0D03D49F1F7A5CB4009FF81E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0D03D4771F7A5C99009FF81E /* ChatWowDemo */;
+			targetProxy = 0D03D49E1F7A5CB4009FF81E /* PBXContainerItemProxy */;
+		};
+		0D03D4A61F7A5CB4009FF81E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0D03D4911F7A5CB4009FF81E /* ChatWow */;
+			targetProxy = 0D03D4A51F7A5CB4009FF81E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0D03D47F1F7A5C99009FF81E /* Main.storyboard */ = {
@@ -273,6 +511,7 @@
 		0D03D48B1F7A5C99009FF81E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6KYJ233SU6;
@@ -288,6 +527,7 @@
 		0D03D48C1F7A5C99009FF81E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6KYJ233SU6;
@@ -297,6 +537,89 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		0D03D4AA1F7A5CB4009FF81E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 6KYJ233SU6;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ChatWow/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.loopon.ChatWow;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0D03D4AB1F7A5CB4009FF81E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 6KYJ233SU6;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ChatWow/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.loopon.ChatWow;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		0D03D4AE1F7A5CB4009FF81E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6KYJ233SU6;
+				INFOPLIST_FILE = ChatWowTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.loopon.ChatWowTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChatWowDemo.app/ChatWowDemo";
+			};
+			name = Debug;
+		};
+		0D03D4AF1F7A5CB4009FF81E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6KYJ233SU6;
+				INFOPLIST_FILE = ChatWowTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.loopon.ChatWowTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChatWowDemo.app/ChatWowDemo";
 			};
 			name = Release;
 		};
@@ -317,6 +640,24 @@
 			buildConfigurations = (
 				0D03D48B1F7A5C99009FF81E /* Debug */,
 				0D03D48C1F7A5C99009FF81E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0D03D4A91F7A5CB4009FF81E /* Build configuration list for PBXNativeTarget "ChatWow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D03D4AA1F7A5CB4009FF81E /* Debug */,
+				0D03D4AB1F7A5CB4009FF81E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0D03D4AD1F7A5CB4009FF81E /* Build configuration list for PBXNativeTarget "ChatWowTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D03D4AE1F7A5CB4009FF81E /* Debug */,
+				0D03D4AF1F7A5CB4009FF81E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
