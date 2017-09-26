@@ -11,15 +11,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ChatMessageView" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ChatMessageView" customModule="ChatWow" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b43-Dg-68m" customClass="ChatBubbleView" customModule="ChatWow" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="6" width="61" height="44"/>
+                    <rect key="frame" x="0.0" y="4" width="61" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QPs-h4-Q90">
-                            <rect key="frame" x="20" y="8" width="29" height="28"/>
+                            <rect key="frame" x="20" y="13" width="29" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -27,11 +27,12 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="QPs-h4-Q90" secondAttribute="bottom" constant="8" id="2Mh-EM-Le6"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="QPs-h4-Q90" secondAttribute="bottom" constant="8" id="2Mh-EM-Le6"/>
                         <constraint firstAttribute="trailing" secondItem="QPs-h4-Q90" secondAttribute="trailing" constant="12" id="6zf-5u-Y9G"/>
                         <constraint firstItem="QPs-h4-Q90" firstAttribute="leading" secondItem="b43-Dg-68m" secondAttribute="leading" constant="20" id="9JB-GE-ZWU"/>
-                        <constraint firstItem="QPs-h4-Q90" firstAttribute="top" secondItem="b43-Dg-68m" secondAttribute="top" constant="8" id="a57-6G-Wco"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="j9Q-Ph-4pN"/>
+                        <constraint firstItem="QPs-h4-Q90" firstAttribute="centerY" secondItem="b43-Dg-68m" secondAttribute="centerY" id="Y8N-j0-lC2"/>
+                        <constraint firstItem="QPs-h4-Q90" firstAttribute="top" relation="greaterThanOrEqual" secondItem="b43-Dg-68m" secondAttribute="top" constant="8" id="a57-6G-Wco"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="42" id="j9Q-Ph-4pN"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="legOnLeft" value="YES"/>
@@ -41,7 +42,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQN-YQ-mpe">
-                    <rect key="frame" x="69" y="32.5" width="54" height="13.5"/>
+                    <rect key="frame" x="69" y="28.5" width="54" height="13.5"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="54" id="h3l-7e-Yaq"/>
                     </constraints>
@@ -52,9 +53,9 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="b43-Dg-68m" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="6" id="3Np-sM-x0K"/>
+                <constraint firstItem="b43-Dg-68m" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="4" id="3Np-sM-x0K"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LQN-YQ-mpe" secondAttribute="trailing" constant="8" id="I1C-FN-yyg"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="b43-Dg-68m" secondAttribute="bottom" constant="6" id="R3D-JI-Mxf"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="b43-Dg-68m" secondAttribute="bottom" constant="4" id="R3D-JI-Mxf"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="LQN-YQ-mpe" secondAttribute="bottom" constant="10" id="RaX-KA-Sqk"/>
                 <constraint firstItem="b43-Dg-68m" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Uwj-G5-nGV"/>
                 <constraint firstItem="LQN-YQ-mpe" firstAttribute="leading" secondItem="b43-Dg-68m" secondAttribute="trailing" constant="8" id="b7w-8h-r5b"/>
