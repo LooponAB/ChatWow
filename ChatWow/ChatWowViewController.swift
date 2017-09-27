@@ -172,7 +172,7 @@ extension ChatWowViewController
 		let index = chatMessageIndex(for: indexPath)
 		guard let chatMessage = dataSource?.chatController(self, chatMessageWithIndex: index) else
 		{
-			return super.tableView(tableView, estimatedHeightForRowAt: indexPath)
+			return 44.0
 		}
 
 		if let textMessage = chatMessage as? ChatTextMessage
@@ -197,7 +197,7 @@ extension ChatWowViewController
 		}
 		else
 		{
-			return super.tableView(tableView, estimatedHeightForRowAt: indexPath)
+			return 44.0
 		}
 	}
 }
