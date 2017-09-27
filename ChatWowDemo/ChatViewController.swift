@@ -28,7 +28,7 @@ class ChatViewController: ChatWowViewController
 			return msg1.date > msg2.date
 		}
 
-		bubbleColorMine = #colorLiteral(red: 0.9988952279, green: 0.1935456341, blue: 0.004275974818, alpha: 1)
+		bubbleColorMine = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
 	}
 
 	@IBAction func addMessages(_ sender: Any)
