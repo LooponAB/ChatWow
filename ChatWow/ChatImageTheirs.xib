@@ -17,8 +17,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="119.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:34 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQe-uA-Sdo">
-                        <rect key="frame" x="136" y="98" width="54" height="13.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="12:34 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQe-uA-Sdo">
+                        <rect key="frame" x="301" y="98" width="54" height="13.5"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="54" id="kaw-v6-hUS"/>
                         </constraints>
@@ -27,15 +27,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ce-rM-jxp" customClass="ChatBubbleView" customModule="ChatWow">
-                        <rect key="frame" x="0.0" y="4" width="128" height="112"/>
+                        <rect key="frame" x="0.0" y="4" width="293" height="112"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="5OB-Xx-Cp1">
-                                <rect key="frame" x="8" y="0.0" width="120" height="112"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="fgg-f1-Tg6"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="300" id="ojz-eQ-CwW"/>
-                                    <constraint firstAttribute="width" constant="120" placeholder="YES" id="xRq-09-y1n"/>
-                                </constraints>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="5OB-Xx-Cp1" customClass="ChatImageView" customModuleProvider="target">
+                                <rect key="frame" x="8" y="0.0" width="285" height="112"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -55,7 +50,7 @@
                     <constraint firstAttribute="bottom" secondItem="hQe-uA-Sdo" secondAttribute="bottom" constant="8" id="YKa-cM-ls8"/>
                     <constraint firstAttribute="bottom" secondItem="3Ce-rM-jxp" secondAttribute="bottom" constant="4" id="Zxv-r6-zma"/>
                     <constraint firstItem="3Ce-rM-jxp" firstAttribute="leading" secondItem="uLO-1c-ll5" secondAttribute="leading" id="lbS-p6-hV1"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hQe-uA-Sdo" secondAttribute="trailing" constant="20" id="v4B-gJ-c0S"/>
+                    <constraint firstAttribute="trailing" secondItem="hQe-uA-Sdo" secondAttribute="trailing" constant="20" id="v4B-gJ-c0S"/>
                     <constraint firstItem="3Ce-rM-jxp" firstAttribute="top" secondItem="uLO-1c-ll5" secondAttribute="top" constant="4" id="ydR-FT-Aag"/>
                 </constraints>
             </tableViewCellContentView>

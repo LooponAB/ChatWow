@@ -153,7 +153,9 @@ extension ChatWowViewController
 			}
 			else if let imageMessage = chatMessage as? ChatImageMessage
 			{
-				chatView.chatImageView?.image = imageMessage.image
+				let image = imageMessage.image
+				chatView.chatImageView?.image = image
+				chatView.chatImageView?.maximumSize = CGSize(width: tableView.bounds.size.width - 116.0, height: 300.0)
 			}
 
 			chatView.timeLabel?.text = timeLabelDateFormatter.string(from: chatMessage.date)

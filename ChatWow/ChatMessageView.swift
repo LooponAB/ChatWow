@@ -13,7 +13,7 @@ public class ChatMessageView: UITableViewCell
 {
 	@IBOutlet var chatLabel: UILabel?
 	@IBOutlet var timeLabel: UILabel?
-	@IBOutlet var chatImageView: UIImageView?
+	@IBOutlet var chatImageView: ChatImageView?
 	{
 		didSet
 		{

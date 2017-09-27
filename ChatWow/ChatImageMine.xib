@@ -17,25 +17,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="119.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:34 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQe-uA-Sdo">
-                        <rect key="frame" x="185" y="98" width="54" height="13.5"/>
-                        <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="54" id="kaw-v6-hUS"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="11"/>
-                        <color key="textColor" white="0.60245572199999997" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R7V-N3-REs" customClass="ChatBubbleView" customModule="ChatWow" customModuleProvider="target">
-                        <rect key="frame" x="247" y="4" width="128" height="112"/>
+                        <rect key="frame" x="82" y="4" width="293" height="112"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="5OB-Xx-Cp1">
-                                <rect key="frame" x="0.0" y="0.0" width="120" height="111.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="fgg-f1-Tg6"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="300" id="ojz-eQ-CwW"/>
-                                    <constraint firstAttribute="width" constant="120" placeholder="YES" id="xRq-09-y1n"/>
-                                </constraints>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="5OB-Xx-Cp1" customClass="ChatImageView" customModule="ChatWow" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="285" height="111.5"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -46,10 +32,19 @@
                             <constraint firstItem="5OB-Xx-Cp1" firstAttribute="leading" secondItem="R7V-N3-REs" secondAttribute="leading" id="ElQ-L1-6OQ"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="12:34 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQe-uA-Sdo">
+                        <rect key="frame" x="20" y="98" width="54" height="13.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="54" id="kaw-v6-hUS"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="11"/>
+                        <color key="textColor" white="0.60245572199999997" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="R7V-N3-REs" secondAttribute="trailing" id="1xG-0M-S88"/>
-                    <constraint firstItem="hQe-uA-Sdo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uLO-1c-ll5" secondAttribute="leading" constant="20" id="KpX-qw-3AL"/>
+                    <constraint firstItem="hQe-uA-Sdo" firstAttribute="leading" secondItem="uLO-1c-ll5" secondAttribute="leading" constant="20" id="KpX-qw-3AL"/>
                     <constraint firstItem="R7V-N3-REs" firstAttribute="leading" secondItem="hQe-uA-Sdo" secondAttribute="trailing" constant="8" id="KyC-IK-dYj"/>
                     <constraint firstAttribute="bottom" secondItem="R7V-N3-REs" secondAttribute="bottom" constant="4" id="Pgq-dl-Hej"/>
                     <constraint firstAttribute="bottom" secondItem="hQe-uA-Sdo" secondAttribute="bottom" constant="8" id="YKa-cM-ls8"/>

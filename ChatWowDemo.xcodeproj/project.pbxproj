@@ -22,6 +22,8 @@
 		0D0A026B1F7BC33A00B85D97 /* ChatImageMine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D0A02691F7BC33A00B85D97 /* ChatImageMine.xib */; };
 		0D0A026D1F7BC91500B85D97 /* ChatImageTheirs.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D0A026C1F7BC4E500B85D97 /* ChatImageTheirs.xib */; };
 		0D0A026E1F7BC91500B85D97 /* ChatImageTheirs.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D0A026C1F7BC4E500B85D97 /* ChatImageTheirs.xib */; };
+		0D0A02701F7BE74200B85D97 /* ChatImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A026F1F7BE74200B85D97 /* ChatImageView.swift */; };
+		0D0A02711F7BE74200B85D97 /* ChatImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A026F1F7BE74200B85D97 /* ChatImageView.swift */; };
 		0D4A6FBE1F7A6A6B00731719 /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4A6FBD1F7A6A6B00731719 /* ChatMessageView.swift */; };
 		0D4A6FBF1F7A6A6B00731719 /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4A6FBD1F7A6A6B00731719 /* ChatMessageView.swift */; };
 		0D4A6FC11F7A85FA00731719 /* ChatMessageMine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4A6FC01F7A85FA00731719 /* ChatMessageMine.xib */; };
@@ -92,6 +94,7 @@
 		0D03D4B01F7A5CD8009FF81E /* ChatWowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWowViewController.swift; sourceTree = "<group>"; };
 		0D0A02691F7BC33A00B85D97 /* ChatImageMine.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatImageMine.xib; sourceTree = "<group>"; };
 		0D0A026C1F7BC4E500B85D97 /* ChatImageTheirs.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatImageTheirs.xib; sourceTree = "<group>"; };
+		0D0A026F1F7BE74200B85D97 /* ChatImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageView.swift; sourceTree = "<group>"; };
 		0D4A6FBD1F7A6A6B00731719 /* ChatMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageView.swift; sourceTree = "<group>"; };
 		0D4A6FC01F7A85FA00731719 /* ChatMessageMine.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMessageMine.xib; sourceTree = "<group>"; };
 		0D4A6FC31F7A868A00731719 /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
@@ -169,6 +172,7 @@
 				0D4A6FC91F7AA04F00731719 /* ChatMessage.swift */,
 				0D4A6FBD1F7A6A6B00731719 /* ChatMessageView.swift */,
 				0D4A6FC31F7A868A00731719 /* ChatBubbleView.swift */,
+				0D0A026F1F7BE74200B85D97 /* ChatImageView.swift */,
 				0D4A6FC01F7A85FA00731719 /* ChatMessageMine.xib */,
 				0D4A6FC71F7A91CF00731719 /* ChatMessageTheirs.xib */,
 				0D4A6FD21F7AB88F00731719 /* ChatInfoLineCell.xib */,
@@ -349,6 +353,7 @@
 				0D03D47E1F7A5C99009FF81E /* ChatViewController.swift in Sources */,
 				0D03D47C1F7A5C99009FF81E /* AppDelegate.swift in Sources */,
 				0D4A6FCA1F7AA05000731719 /* ChatMessage.swift in Sources */,
+				0D0A02701F7BE74200B85D97 /* ChatImageView.swift in Sources */,
 				0D4A6FC81F7A964900731719 /* ChatWowViewController.swift in Sources */,
 				0D4A6FC41F7A868A00731719 /* ChatBubbleView.swift in Sources */,
 			);
@@ -362,6 +367,7 @@
 				0D4A6FCB1F7AA05000731719 /* ChatMessage.swift in Sources */,
 				0D4A6FBF1F7A6A6B00731719 /* ChatMessageView.swift in Sources */,
 				0D03D4B21F7A5CD8009FF81E /* ChatWowViewController.swift in Sources */,
+				0D0A02711F7BE74200B85D97 /* ChatImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
