@@ -35,9 +35,22 @@ public class ChatTextMessage: ChatMessage
 		self.date = date
 	}
 
+	var useBigEmoji: Bool
+	{
+		return text.isPureEmoji
+	}
+
 	public var viewIdentifier: String
 	{
-		return side == .mine ? "chat_default_mine" : "chat_default_theirs"
+		// This is bad but oh well 😔
+		if useBigEmoji
+		{
+			return side == .mine ? "chat_default_emoji_mine" : "chat_default_emoji_theirs"
+		}
+		else
+		{
+			return side == .mine ? "chat_default_mine" : "chat_default_theirs"
+		}
 	}
 }
 
@@ -65,5 +78,21 @@ public class ChatImageMessage: ChatMessage
 	public var viewIdentifier: String
 	{
 		return side == .mine ? "chat_default_image_mine" : "chat_default_image_theirs"
+	}
+}
+
+extension String
+{
+	var isPureEmoji: Bool
+	{
+		for character in self
+		{
+			if let result = (String(character) as NSString).value(forKey: "_containsEmoji") as? Bool, !result
+			{
+				return false
+			}
+		}
+
+		return true
 	}
 }

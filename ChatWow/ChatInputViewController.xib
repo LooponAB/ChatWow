@@ -51,8 +51,12 @@
                                     <outlet property="delegate" destination="-1" id="Bgo-0z-GCc"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r5m-zM-G8J">
-                                <rect key="frame" x="340" y="10" width="26" height="26"/>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r5m-zM-G8J">
+                                <rect key="frame" x="333" y="0.0" width="42" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="42" id="Qnv-lC-pMC"/>
+                                    <constraint firstAttribute="height" constant="46" id="elc-1P-AOH"/>
+                                </constraints>
                                 <state key="normal" image="send"/>
                                 <connections>
                                     <action selector="send:" destination="-1" eventType="touchUpInside" id="KXd-hW-USe"/>
@@ -65,7 +69,7 @@
                             <constraint firstAttribute="trailing" secondItem="uAi-6k-qqu" secondAttribute="trailing" constant="4" id="fnK-z5-VuM"/>
                             <constraint firstItem="uAi-6k-qqu" firstAttribute="leading" secondItem="HJC-qk-NQ4" secondAttribute="leading" constant="4" id="mLS-4P-jvr"/>
                             <constraint firstItem="uAi-6k-qqu" firstAttribute="top" secondItem="HJC-qk-NQ4" secondAttribute="top" constant="5" id="x71-vD-iR3"/>
-                            <constraint firstAttribute="trailing" secondItem="r5m-zM-G8J" secondAttribute="trailing" constant="9" id="xC7-c5-6M2"/>
+                            <constraint firstAttribute="trailing" secondItem="r5m-zM-G8J" secondAttribute="trailing" id="xC7-c5-6M2"/>
                         </constraints>
                     </view>
                     <blurEffect style="extraLight"/>

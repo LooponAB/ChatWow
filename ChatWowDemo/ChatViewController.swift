@@ -43,6 +43,8 @@ class ChatViewController: ChatWowViewController
 			"Oh hai",
 			"A slightly longer message so we see it wrap",
 			"A string that has emojis in it 🤔🤡",
+			"👽❕",
+			"💩",
 			UIImage(named: "image_1")!,
 			UIImage(named: "image_2")!
 		]
@@ -83,6 +85,8 @@ extension ChatViewController: ChatWowDelegate
 {
 	func chatController(_ chatController: ChatWowViewController, userDidInsertMessage message: String)
 	{
+		guard message != "" else { return }
+
 		chats.insert(ChatTextMessage(text: message, side: .mine, date: Date()), at: 0)
 		insertMessages(newMessages: 1, scrollToBottom: true)
 		clearInput()
