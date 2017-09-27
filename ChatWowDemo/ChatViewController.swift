@@ -17,6 +17,7 @@ class ChatViewController: ChatWowViewController
 		super.viewDidLoad()
 
 		dataSource = self
+		delegate = self
 
 		for i in 0..<32
 		{
@@ -75,6 +76,21 @@ extension ChatViewController: ChatWowDataSource
 	func chatController(_ chatController: ChatWowViewController, chatMessageWithIndex index: Int) -> ChatMessage
 	{
 		return chats[index]
+	}
+}
+
+extension ChatViewController: ChatWowDelegate
+{
+	func chatController(_ chatController: ChatWowViewController, userDidInsertMessage message: String)
+	{
+		chats.insert(ChatTextMessage(text: message, side: .mine, date: Date()), at: 0)
+		insertMessages(newMessages: 1, scrollToBottom: true)
+		clearInput()
+	}
+
+	func chatController(_ chatController: ChatWowViewController, prepareChatView cellView: ChatMessageView)
+	{
+
 	}
 }
 

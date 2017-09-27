@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChatInputViewController" customModule="ChatWow" customModuleProvider="target">
             <connections>
+                <outlet property="inputField" destination="uAi-6k-qqu" id="J9V-nd-nhc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -34,7 +35,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="alphabet" returnKeyType="send"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="send"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
                                         <real key="value" value="16"/>
@@ -46,10 +47,16 @@
                                         <color key="value" red="0.77530282735824585" green="0.77951180934906006" blue="0.79731816053390503" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="-1" id="Bgo-0z-GCc"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r5m-zM-G8J">
                                 <rect key="frame" x="340" y="10" width="26" height="26"/>
                                 <state key="normal" image="send"/>
+                                <connections>
+                                    <action selector="send:" destination="-1" eventType="touchUpInside" id="KXd-hW-USe"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>

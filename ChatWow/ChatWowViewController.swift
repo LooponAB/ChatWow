@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol ChatWowDataSource
+public protocol ChatWowDataSource: class
 {
 	/// Total number of messages available to be displayed.
 	func numberOfMessages(in chatController: ChatWowViewController) -> Int
@@ -18,15 +18,19 @@ public protocol ChatWowDataSource
 	func chatController(_ chatController: ChatWowViewController, chatMessageWithIndex index: Int) -> ChatMessage
 }
 
-public protocol ChatWowDelegate
+public protocol ChatWowDelegate: class
 {
+	/// Called when a chat bubble is about to be displayed. Can be used to setup custom chat bubble views.
 	func chatController(_ chatController: ChatWowViewController, prepareChatView cellView: ChatMessageView)
+
+	/// Called when the user taps the "send" button, or taps/presses the return key on the keyboard.
+	func chatController(_ chatController: ChatWowViewController, userDidInsertMessage message: String)
 }
 
 public class ChatWowViewController: UIViewController
 {
-	var dataSource: ChatWowDataSource? = nil
-	var delegate: ChatWowDelegate? = nil
+	weak var dataSource: ChatWowDataSource? = nil
+	weak var delegate: ChatWowDelegate? = nil
 
 	/// The color used to fill the message bubbles from "their" messages.
 	var bubbleColorTheirs: UIColor = #colorLiteral(red: 0.8817413449, green: 0.8817413449, blue: 0.8817413449, alpha: 1)
@@ -40,7 +44,22 @@ public class ChatWowViewController: UIViewController
 
 	private var bottomConstraint: NSLayoutConstraint? = nil
 
-	var inputController: ChatInputViewController = ChatInputViewController.make()
+	var keyboardSpacerConstraint: NSLayoutConstraint?
+	{
+		return bottomConstraint
+	}
+
+	private let _inputController: ChatInputViewController = ChatInputViewController.make()
+
+	var inputController: ChatInputViewController
+	{
+		return _inputController
+	}
+
+	func clearInput()
+	{
+		inputController.inputField.text = ""
+	}
 
 	private lazy var timeLabelDateFormatter: DateFormatter =
 		{
@@ -70,6 +89,7 @@ public class ChatWowViewController: UIViewController
 
 		tableView.translatesAutoresizingMaskIntoConstraints = false
 		inputController.view.translatesAutoresizingMaskIntoConstraints = false
+		inputController.delegate = self
 
 		let constraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[tableView]|", options: [],
 		                                                 metrics: nil, views: ["tableView": tableView])
@@ -82,7 +102,7 @@ public class ChatWowViewController: UIViewController
 
 		tableView.bottomAnchor.constraint(equalTo: inputController.view.bottomAnchor).isActive = true
 
-		bottomConstraint = view.bottomAnchor.constraintEqualToSystemSpacingBelow(inputController.view.bottomAnchor, multiplier: 1.0)
+		bottomConstraint = view.bottomAnchor.constraint(equalTo: inputController.view.bottomAnchor)
 		bottomConstraint?.isActive = true
 
 		tableView.dataSource = self
@@ -97,10 +117,10 @@ public class ChatWowViewController: UIViewController
 		tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: inputController.view.bounds.height, right: 0)
 		tableView.backgroundColor = .white
 		tableView.separatorStyle = .none
+		tableView.keyboardDismissMode = .interactive
 		tableView.reloadData()
 
-		NotificationCenter.default.addObserver(self, selector: #selector(ChatWowViewController.animateWithKeyboard(_:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(ChatWowViewController.animateWithKeyboard(_:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
+		setupKeyboardDismissalAnimations()
 	}
 
 	public override func viewWillAppear(_ animated: Bool)
@@ -108,6 +128,19 @@ public class ChatWowViewController: UIViewController
 		super.viewWillAppear(animated)
 
 		scrollToBottom(animated: false)
+	}
+
+	private func setupKeyboardDismissalAnimations()
+	{
+		NotificationCenter.default.addObserver(self, selector: #selector(ChatWowViewController.animateWithKeyboard(_:)),
+		                                       name: Notification.Name.UIKeyboardWillShow, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(ChatWowViewController.animateWithKeyboard(_:)),
+		                                       name: Notification.Name.UIKeyboardWillHide, object: nil)
+
+		let helperView = ChatKeyboardHelperView(frame: CGRect(x: 0, y: 0, width: 320, height: 0))
+		helperView.delegate = self
+
+		inputController.inputField.inputAccessoryView = helperView
 	}
 
 	@objc func animateWithKeyboard(_ notification: Notification)
@@ -128,6 +161,30 @@ public class ChatWowViewController: UIViewController
 				self.view.layoutIfNeeded()
 				self.scrollToBottom(animated: true)
 			}, completion: nil)
+	}
+
+	deinit
+	{
+		NotificationCenter.default.removeObserver(self)
+	}
+}
+
+extension ChatWowViewController: ChatInputViewControllerDelegate
+{
+	func userDidSendMessage(_ message: String)
+	{
+		delegate?.chatController(self, userDidInsertMessage: message)
+	}
+}
+
+extension ChatWowViewController: ChatKeyboardHelperViewDelegate
+{
+	func keyboardHelperView(didChangePosition verticalPosition: CGFloat)
+	{
+		if let windowHeight = view.window?.bounds.height, windowHeight >= verticalPosition
+		{
+			keyboardSpacerConstraint?.constant = windowHeight - verticalPosition
+		}
 	}
 }
 

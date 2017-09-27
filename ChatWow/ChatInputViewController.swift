@@ -8,10 +8,18 @@
 
 import UIKit
 
+protocol ChatInputViewControllerDelegate: class
+{
+	func userDidSendMessage(_ message: String)
+}
+
 class ChatInputViewController: UIViewController
 {
+	@IBOutlet weak var inputField: ChatInputField!
 
-    override func viewDidLoad() {
+	weak var delegate: ChatInputViewControllerDelegate? = nil
+
+	override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -33,6 +41,19 @@ class ChatInputViewController: UIViewController
     }
     */
 
+	@IBAction func send(_ sender: Any)
+	{
+		delegate?.userDidSendMessage(inputField.text ?? "")
+	}
+}
+
+extension ChatInputViewController: UITextFieldDelegate
+{
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool
+	{
+		send(textField)
+		return true
+	}
 }
 
 extension ChatInputViewController
