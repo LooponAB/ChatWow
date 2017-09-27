@@ -32,7 +32,6 @@
                         <constraint firstItem="QPs-h4-Q90" firstAttribute="leading" secondItem="b43-Dg-68m" secondAttribute="leading" constant="20" id="9JB-GE-ZWU"/>
                         <constraint firstItem="QPs-h4-Q90" firstAttribute="centerY" secondItem="b43-Dg-68m" secondAttribute="centerY" id="Y8N-j0-lC2"/>
                         <constraint firstItem="QPs-h4-Q90" firstAttribute="top" relation="greaterThanOrEqual" secondItem="b43-Dg-68m" secondAttribute="top" constant="8" id="a57-6G-Wco"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="42" id="j9Q-Ph-4pN"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="legOnLeft" value="YES"/>

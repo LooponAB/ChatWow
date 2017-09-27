@@ -59,7 +59,7 @@ public class ChatWowViewController: UITableViewController
 
 extension ChatWowViewController // Chat interface
 {
-	func insertMessageCount(newMessages count: Int, scrollToBottom: Bool = false)
+	func insertMessages(newMessages count: Int, scrollToBottom: Bool = false)
 	{
 		guard let total = dataSource?.numberOfMessages(in: self) else
 		{
@@ -77,7 +77,7 @@ extension ChatWowViewController // Chat interface
 
 		if scrollToBottom
 		{
-			DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
 				self.scrollToBottom()
 			})
 		}

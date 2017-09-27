@@ -31,10 +31,10 @@ class ChatViewController: ChatWowViewController
 
 	@IBAction func addMessages(_ sender: Any)
 	{
-		var newMessages = ["A new message", "Another new message", "A message", "Oh hai."]
+		var newMessages = ["A new message", "Another new message", "A message", "Oh hai", "A slightly longer message so we see it wrap"]
 
 		chats.insert(ChatTextMessage(text: newMessages[Int(arc4random()) % newMessages.count], side: (arc4random() % 2) == 0 ? .mine : .theirs, date: Date()), at: 0)
-		insertMessageCount(newMessages: 1, scrollToBottom: true)
+		insertMessages(newMessages: 1, scrollToBottom: true)
 	}
 }
 
