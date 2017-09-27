@@ -62,6 +62,8 @@ public class ChatWowViewController: UITableViewController
 		let bundle = Bundle(for: ChatMessageView.self)
 		tableView.register(UINib(nibName: "ChatMessageMine", bundle: bundle), forCellReuseIdentifier: "chat_default_mine")
 		tableView.register(UINib(nibName: "ChatMessageTheirs", bundle: bundle), forCellReuseIdentifier: "chat_default_theirs")
+		tableView.register(UINib(nibName: "ChatImageMine", bundle: bundle), forCellReuseIdentifier: "chat_default_image_mine")
+		tableView.register(UINib(nibName: "ChatImageTheirs", bundle: bundle), forCellReuseIdentifier: "chat_default_image_theirs")
 		tableView.register(UINib(nibName: "ChatInfoLineCell", bundle: bundle), forCellReuseIdentifier: "chat_default_info")
 
 		setup()
@@ -149,6 +151,10 @@ extension ChatWowViewController
 			{
 				chatView.chatLabel?.text = textMessage.text
 			}
+			else if let imageMessage = chatMessage as? ChatImageMessage
+			{
+				chatView.chatImageView?.image = imageMessage.image
+			}
 
 			chatView.timeLabel?.text = timeLabelDateFormatter.string(from: chatMessage.date)
 
@@ -174,6 +180,11 @@ extension ChatWowViewController
 			                                                       attributes: defaultTextMessageCellAttributes, context: nil).size
 
 			return ceil(size.height) + 24.0
+		}
+		else if let imageMessage = chatMessage as? ChatImageMessage
+		{
+			let height = imageMessage.image.size.height
+			return min(300.0, max(80.0, height)) + 16.0
 		}
 		else
 		{

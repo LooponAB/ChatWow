@@ -33,9 +33,32 @@ class ChatViewController: ChatWowViewController
 
 	@IBAction func addMessages(_ sender: Any)
 	{
-		var newMessages = ["A new message", "Another new message", "A message", "Oh hai", "A slightly longer message so we see it wrap", "A string that has emojis in it 🤔🤡"]
+		var newMessages: [Any] = [
+			"A new message",
+			"Another new message",
+			"A message",
+			"Oh hai",
+			"A slightly longer message so we see it wrap",
+			"A string that has emojis in it 🤔🤡",
+			UIImage(named: "image_1")!,
+			UIImage(named: "image_2")!
+		]
 
-		chats.insert(ChatTextMessage(text: newMessages[Int(arc4random()) % newMessages.count], side: (arc4random() % 2) == 0 ? .mine : .theirs, date: Date()), at: 0)
+		let newMessage = newMessages[Int(arc4random()) % newMessages.count]
+
+		if let newTextMessage = newMessage as? String
+		{
+			chats.insert(ChatTextMessage(text: newTextMessage, side: (arc4random() % 2) == 0 ? .mine : .theirs, date: Date()), at: 0)
+		}
+		else if let newImageMessage = newMessage as? UIImage
+		{
+			chats.insert(ChatImageMessage(image: newImageMessage, side: (arc4random() % 2) == 0 ? .mine : .theirs, date: Date()), at: 0)
+		}
+		else
+		{
+			return
+		}
+
 		insertMessages(newMessages: 1, scrollToBottom: true)
 	}
 }

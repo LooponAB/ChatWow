@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="120" id="zf5-zO-EOG" customClass="ChatMessageView" customModule="ChatWow" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zf5-zO-EOG" id="uLO-1c-ll5">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="119.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:34 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQe-uA-Sdo">
+                        <rect key="frame" x="185" y="98" width="54" height="13.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="54" id="kaw-v6-hUS"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="11"/>
+                        <color key="textColor" white="0.60245572199999997" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R7V-N3-REs" customClass="ChatBubbleView" customModule="ChatWow" customModuleProvider="target">
+                        <rect key="frame" x="247" y="4" width="128" height="112"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="5OB-Xx-Cp1">
+                                <rect key="frame" x="0.0" y="0.0" width="120" height="111.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="fgg-f1-Tg6"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="300" id="ojz-eQ-CwW"/>
+                                    <constraint firstAttribute="width" constant="120" placeholder="YES" id="xRq-09-y1n"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5OB-Xx-Cp1" firstAttribute="top" secondItem="R7V-N3-REs" secondAttribute="top" id="4CE-P4-Ikh"/>
+                            <constraint firstAttribute="trailing" secondItem="5OB-Xx-Cp1" secondAttribute="trailing" constant="8" id="7km-Sd-Y3h"/>
+                            <constraint firstAttribute="bottom" secondItem="5OB-Xx-Cp1" secondAttribute="bottom" id="DgX-Ms-XfM"/>
+                            <constraint firstItem="5OB-Xx-Cp1" firstAttribute="leading" secondItem="R7V-N3-REs" secondAttribute="leading" id="ElQ-L1-6OQ"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="R7V-N3-REs" secondAttribute="trailing" id="1xG-0M-S88"/>
+                    <constraint firstItem="hQe-uA-Sdo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uLO-1c-ll5" secondAttribute="leading" constant="20" id="KpX-qw-3AL"/>
+                    <constraint firstItem="R7V-N3-REs" firstAttribute="leading" secondItem="hQe-uA-Sdo" secondAttribute="trailing" constant="8" id="KyC-IK-dYj"/>
+                    <constraint firstAttribute="bottom" secondItem="R7V-N3-REs" secondAttribute="bottom" constant="4" id="Pgq-dl-Hej"/>
+                    <constraint firstAttribute="bottom" secondItem="hQe-uA-Sdo" secondAttribute="bottom" constant="8" id="YKa-cM-ls8"/>
+                    <constraint firstItem="R7V-N3-REs" firstAttribute="top" secondItem="uLO-1c-ll5" secondAttribute="top" constant="4" id="bl2-Gn-3UY"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="chatImageView" destination="5OB-Xx-Cp1" id="1cr-pG-4tk"/>
+                <outlet property="timeLabel" destination="hQe-uA-Sdo" id="9jc-u0-015"/>
+            </connections>
+            <point key="canvasLocation" x="-17.5" y="115"/>
+        </tableViewCell>
+    </objects>
+</document>

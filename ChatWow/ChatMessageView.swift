@@ -11,8 +11,15 @@ import UIKit
 /// The view used for each individual chat message.
 public class ChatMessageView: UITableViewCell
 {
-	@IBOutlet var chatLabel: UILabel!
-	@IBOutlet var timeLabel: UILabel!
+	@IBOutlet var chatLabel: UILabel?
+	@IBOutlet var timeLabel: UILabel?
+	@IBOutlet var chatImageView: UIImageView?
+	{
+		didSet
+		{
+			chatImageView?.layer.cornerRadius = 11.0
+		}
+	}
 
 	public override var frame: CGRect
 	{
