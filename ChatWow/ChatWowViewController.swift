@@ -23,7 +23,7 @@ public protocol ChatWowDelegate
 	func chatController(_ chatController: ChatWowViewController, prepareChatView cellView: ChatMessageView)
 }
 
-public class ChatWowViewController: UITableViewController
+public class ChatWowViewController: UIViewController
 {
 	var dataSource: ChatWowDataSource? = nil
 	var delegate: ChatWowDelegate? = nil
@@ -34,7 +34,13 @@ public class ChatWowViewController: UITableViewController
 	/// The color used to fill the message bubbles from "our" messages.
 	var bubbleColorMine: UIColor = #colorLiteral(red: 0.004275974818, green: 0.478739202, blue: 0.9988952279, alpha: 1)
 
+	var tableView: UITableView = UITableView(frame: CGRect(x: 0, y: 0, width: 320, height: 240), style: .plain)
+
 	private var cachedCount: Int = 0
+
+	private var bottomConstraint: NSLayoutConstraint? = nil
+
+	var inputController: ChatInputViewController = ChatInputViewController.make()
 
 	private lazy var timeLabelDateFormatter: DateFormatter =
 		{
@@ -59,20 +65,76 @@ public class ChatWowViewController: UITableViewController
 	{
 		super.viewDidLoad()
 
+		view.addSubview(tableView)
+		view.addSubview(inputController.view)
+
+		tableView.translatesAutoresizingMaskIntoConstraints = false
+		inputController.view.translatesAutoresizingMaskIntoConstraints = false
+
+		let constraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[tableView]|", options: [],
+		                                                 metrics: nil, views: ["tableView": tableView])
+						+ NSLayoutConstraint.constraints(withVisualFormat: "H:|[inputView]|", options: [],
+														 metrics: nil, views: ["inputView": inputController.view])
+						+ NSLayoutConstraint.constraints(withVisualFormat: "V:|[tableView]", options: [],
+														 metrics: nil, views: ["tableView": tableView])
+
+		NSLayoutConstraint.activate(constraints)
+
+		tableView.bottomAnchor.constraint(equalTo: inputController.view.bottomAnchor).isActive = true
+
+		bottomConstraint = view.bottomAnchor.constraintEqualToSystemSpacingBelow(inputController.view.bottomAnchor, multiplier: 1.0)
+		bottomConstraint?.isActive = true
+
+		tableView.dataSource = self
+		tableView.delegate = self
+
 		let bundle = Bundle(for: ChatMessageView.self)
 		tableView.register(UINib(nibName: "ChatMessageMine", bundle: bundle), forCellReuseIdentifier: "chat_default_mine")
 		tableView.register(UINib(nibName: "ChatMessageTheirs", bundle: bundle), forCellReuseIdentifier: "chat_default_theirs")
 		tableView.register(UINib(nibName: "ChatImageMine", bundle: bundle), forCellReuseIdentifier: "chat_default_image_mine")
 		tableView.register(UINib(nibName: "ChatImageTheirs", bundle: bundle), forCellReuseIdentifier: "chat_default_image_theirs")
 		tableView.register(UINib(nibName: "ChatInfoLineCell", bundle: bundle), forCellReuseIdentifier: "chat_default_info")
+		tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: inputController.view.bounds.height, right: 0)
 
 		setup()
+
+		tableView.reloadData()
+
+		NotificationCenter.default.addObserver(self, selector: #selector(ChatWowViewController.animateWithKeyboard(_:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(ChatWowViewController.animateWithKeyboard(_:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
 	}
 
 	private func setup()
 	{
 		tableView.backgroundColor = .white
 		tableView.separatorStyle = .none
+	}
+
+	public override func viewWillAppear(_ animated: Bool)
+	{
+		super.viewWillAppear(animated)
+
+		scrollToBottom(animated: false)
+	}
+
+	@objc func animateWithKeyboard(_ notification: Notification)
+	{
+		guard let bottomConstraint = self.bottomConstraint else { return }
+
+		let userInfo = notification.userInfo!
+		let keyboardHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
+		let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! Double
+		let curve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! UInt
+		let moveUp = notification.name == .UIKeyboardWillShow
+
+		bottomConstraint.constant = moveUp ? keyboardHeight : 0
+
+		let options = UIViewAnimationOptions(rawValue: curve << 16)
+		UIView.animate(withDuration: duration, delay: 0, options: options, animations:
+			{
+				self.view.layoutIfNeeded()
+				self.scrollToBottom(animated: true)
+			}, completion: nil)
 	}
 }
 
@@ -97,18 +159,19 @@ extension ChatWowViewController // Chat interface
 		if scrollToBottom
 		{
 			DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
-				self.scrollToBottom()
+				self.scrollToBottom(animated: true)
 			})
 		}
 	}
 
-	func scrollToBottom()
+	func scrollToBottom(animated: Bool)
 	{
-		tableView.scrollToRow(at: indexPath(for: 0), at: .bottom, animated: true)
+		guard let indexPath = indexPath(for: 0) else { return }
+		tableView.scrollToRow(at: indexPath, at: .bottom, animated: animated)
 	}
 }
 
-extension ChatWowViewController
+extension ChatWowViewController: UITableViewDelegate, UITableViewDataSource
 {
 	/// This is where the magic of showing messages from top to bottom happens. We need to flip the default indexPath ordering (which
 	/// is 0..<count) to the inverted chat message ordering (which is (count-1)...0).
@@ -117,23 +180,30 @@ extension ChatWowViewController
 		return cachedCount - indexPath.row - 1
 	}
 
-	private func indexPath(for messageIndex: Int) -> IndexPath
+	private func indexPath(for messageIndex: Int) -> IndexPath?
 	{
-		return IndexPath(row: (messageIndex + 1 - cachedCount) * -1, section: 0)
+		let row = (cachedCount - 1) - messageIndex
+
+		guard row >= 0 else
+		{
+			return nil
+		}
+
+		return IndexPath(row: row, section: 0)
 	}
 
-	public override func numberOfSections(in tableView: UITableView) -> Int
+	public func numberOfSections(in tableView: UITableView) -> Int
 	{
 		return 1
 	}
 
-	public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
 		cachedCount = dataSource?.numberOfMessages(in: self) ?? 0
 		return cachedCount
 	}
 
-	public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
 		let index = chatMessageIndex(for: indexPath)
 		guard let chatMessage = dataSource?.chatController(self, chatMessageWithIndex: index) else
@@ -167,7 +237,7 @@ extension ChatWowViewController
 	}
 
 	// Tries to estimate the cell height only for cell types whose behavior we can predict.
-	public override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat
+	public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat
 	{
 		let index = chatMessageIndex(for: indexPath)
 		guard let chatMessage = dataSource?.chatController(self, chatMessageWithIndex: index) else
@@ -183,7 +253,7 @@ extension ChatWowViewController
 
 			if textMessage is ChatAnnotationMessage
 			{
-				return ceil(size.height) + 8.0
+				return ceil(size.height) + 10.0
 			}
 			else
 			{

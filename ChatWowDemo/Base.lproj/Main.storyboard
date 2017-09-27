@@ -5,33 +5,31 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Chat View Controller-->
-        <scene sceneID="z5P-gA-j6C">
+        <scene sceneID="Kep-62-3CQ">
             <objects>
-                <tableViewController id="ZeL-1d-7ar" customClass="ChatViewController" customModule="ChatWowDemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ead-9h-aZF">
+                <viewController id="sxM-td-kg1" customClass="ChatViewController" customModule="ChatWowDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6Iz-wd-HVy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outlet property="dataSource" destination="ZeL-1d-7ar" id="VCu-ay-xs5"/>
-                            <outlet property="delegate" destination="ZeL-1d-7ar" id="lgG-3q-zHe"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="bV9-Zx-OKW">
+                        <viewLayoutGuide key="safeArea" id="A6g-ys-eCO"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="P6Z-dZ-il1">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="wx8-Ix-dOJ">
                             <connections>
-                                <action selector="addMessages:" destination="ZeL-1d-7ar" id="5S5-4T-XQI"/>
+                                <action selector="addMessages:" destination="sxM-td-kg1" id="TNk-sc-DWa"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AMN-hy-q7x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c6z-m1-5YO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1399" y="86"/>
+            <point key="canvasLocation" x="1458" y="86"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7Bg-fW-0me">
@@ -44,7 +42,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ZeL-1d-7ar" kind="relationship" relationship="rootViewController" id="ctU-gf-Vrl"/>
+                        <segue destination="sxM-td-kg1" kind="relationship" relationship="rootViewController" id="Q10-FW-dLE"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Iz-Zn-U4h" userLabel="First Responder" sceneMemberID="firstResponder"/>

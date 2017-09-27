@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChatInputViewController" customModule="ChatWow" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ywc-ug-atc">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="HJC-qk-NQ4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" placeholder="Type here to chat" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uAi-6k-qqu" customClass="ChatInputField" customModule="ChatWow" customModuleProvider="target">
+                                <rect key="frame" x="4" y="5" width="367" height="36"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="yPg-rb-2mL"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="alphabet" returnKeyType="send"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.77530282735824585" green="0.77951180934906006" blue="0.79731816053390503" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r5m-zM-G8J">
+                                <rect key="frame" x="340" y="10" width="26" height="26"/>
+                                <state key="normal" image="send"/>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="r5m-zM-G8J" firstAttribute="centerY" secondItem="HJC-qk-NQ4" secondAttribute="centerY" id="5zH-zP-1wE"/>
+                            <constraint firstAttribute="bottom" secondItem="uAi-6k-qqu" secondAttribute="bottom" constant="5" id="MPd-FP-w5b"/>
+                            <constraint firstAttribute="trailing" secondItem="uAi-6k-qqu" secondAttribute="trailing" constant="4" id="fnK-z5-VuM"/>
+                            <constraint firstItem="uAi-6k-qqu" firstAttribute="leading" secondItem="HJC-qk-NQ4" secondAttribute="leading" constant="4" id="mLS-4P-jvr"/>
+                            <constraint firstItem="uAi-6k-qqu" firstAttribute="top" secondItem="HJC-qk-NQ4" secondAttribute="top" constant="5" id="x71-vD-iR3"/>
+                            <constraint firstAttribute="trailing" secondItem="r5m-zM-G8J" secondAttribute="trailing" constant="9" id="xC7-c5-6M2"/>
+                        </constraints>
+                    </view>
+                    <blurEffect style="extraLight"/>
+                </visualEffectView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="ywc-ug-atc" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="6Dj-9d-uLq"/>
+                <constraint firstItem="ywc-ug-atc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Bfz-Gz-4f2"/>
+                <constraint firstItem="ywc-ug-atc" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Tmj-Qi-g3Q"/>
+                <constraint firstItem="ywc-ug-atc" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="u6b-mm-Pku"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="34.5" y="54"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="send" width="26" height="26"/>
+    </resources>
+</document>
