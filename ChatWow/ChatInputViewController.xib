@@ -25,9 +25,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" placeholder="Type here to chat" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uAi-6k-qqu" customClass="ChatInputField" customModule="ChatWow" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" placeholder="Type here to chat" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="uAi-6k-qqu" customClass="ChatInputField" customModule="ChatWow" customModuleProvider="target">
                                 <rect key="frame" x="4" y="5" width="367" height="36"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <accessibility key="accessibilityConfiguration" hint="Insert text here to send a message"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="yPg-rb-2mL"/>
                                 </constraints>

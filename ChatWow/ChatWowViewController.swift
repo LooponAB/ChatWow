@@ -95,19 +95,12 @@ public class ChatWowViewController: UIViewController
 		tableView.register(UINib(nibName: "ChatImageTheirs", bundle: bundle), forCellReuseIdentifier: "chat_default_image_theirs")
 		tableView.register(UINib(nibName: "ChatInfoLineCell", bundle: bundle), forCellReuseIdentifier: "chat_default_info")
 		tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: inputController.view.bounds.height, right: 0)
-
-		setup()
-
+		tableView.backgroundColor = .white
+		tableView.separatorStyle = .none
 		tableView.reloadData()
 
 		NotificationCenter.default.addObserver(self, selector: #selector(ChatWowViewController.animateWithKeyboard(_:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(ChatWowViewController.animateWithKeyboard(_:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
-	}
-
-	private func setup()
-	{
-		tableView.backgroundColor = .white
-		tableView.separatorStyle = .none
 	}
 
 	public override func viewWillAppear(_ animated: Bool)
