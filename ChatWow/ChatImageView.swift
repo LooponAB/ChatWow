@@ -8,9 +8,72 @@
 
 import UIKit
 
+@IBDesignable
 class ChatImageView: UIImageView
 {
-	var maximumSize: CGSize = CGSize.zero
+	lazy var maximumSize: CGSize =
+	{
+		return bounds.size
+	}()
+
+	override init(frame: CGRect)
+	{
+		super.init(frame: frame)
+
+		setupMaskBubble()
+	}
+
+	override init(image: UIImage?)
+	{
+		super.init(image: image)
+
+		setupMaskBubble()
+	}
+
+	override init(image: UIImage?, highlightedImage: UIImage?)
+	{
+		super.init(image: image, highlightedImage: highlightedImage)
+
+		setupMaskBubble()
+	}
+
+	required init?(coder aDecoder: NSCoder)
+	{
+		super.init(coder: aDecoder)
+
+		setupMaskBubble()
+	}
+
+	private func setupMaskBubble()
+	{
+		mask = ChatBubbleView(frame: bounds)
+		mask?.backgroundColor = .clear
+		mask?.setNeedsDisplay()
+	}
+
+	override var bounds: CGRect
+	{
+		didSet
+		{
+			mask?.frame = bounds
+			mask?.setNeedsDisplay()
+			setNeedsDisplay()
+		}
+	}
+
+	@IBInspectable
+	var legOnLeft: Bool
+	{
+		get
+		{
+			return (mask as? ChatBubbleView)?.legOnLeft ?? false
+		}
+
+		set
+		{
+			(mask as? ChatBubbleView)?.legOnLeft = newValue
+		}
+	}
 
 	override var intrinsicContentSize: CGSize
 	{

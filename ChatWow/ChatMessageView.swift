@@ -14,12 +14,6 @@ public class ChatMessageView: UITableViewCell
 	@IBOutlet var chatLabel: UILabel?
 	@IBOutlet var timeLabel: UILabel?
 	@IBOutlet var chatImageView: ChatImageView?
-	{
-		didSet
-		{
-			chatImageView?.layer.cornerRadius = 11.0
-		}
-	}
 
 	public override var frame: CGRect
 	{
