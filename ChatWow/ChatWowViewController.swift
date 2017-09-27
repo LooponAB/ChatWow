@@ -30,12 +30,23 @@ public class ChatWowViewController: UITableViewController
 
 	private var cachedCount: Int = 0
 
-	lazy var timeLabelDateFormatter: DateFormatter =
+	private lazy var timeLabelDateFormatter: DateFormatter =
 		{
 			let formatter = DateFormatter()
 			formatter.dateStyle = .none
 			formatter.timeStyle = .short
 			return formatter
+		}()
+
+	private lazy var defaultTextMessageCellAttributes: [NSAttributedStringKey: Any] =
+		{
+			let paragraph = NSMutableParagraphStyle()
+			paragraph.lineBreakMode = .byWordWrapping
+
+			return [
+				.font: UIFont.systemFont(ofSize: 15.0),
+				.paragraphStyle: paragraph
+			]
 		}()
 
 	public override func viewDidLoad()
@@ -138,5 +149,28 @@ extension ChatWowViewController
 		}
 
 		return cell
+	}
+
+	// Tries to estimate the cell height only for cell types whose behavior we can predict.
+	public override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat
+	{
+		let index = chatMessageIndex(for: indexPath)
+		guard let chatMessage = dataSource?.chatController(self, chatMessageWithIndex: index) else
+		{
+			return super.tableView(tableView, estimatedHeightForRowAt: indexPath)
+		}
+
+		if let textMessage = chatMessage as? ChatTextMessage
+		{
+			let maxSize = CGSize(width: tableView.bounds.width - 104.0, height: CGFloat.greatestFiniteMagnitude)
+			let size = (textMessage.text as NSString).boundingRect(with: maxSize, options: [.usesLineFragmentOrigin, .usesFontLeading],
+			                                                       attributes: defaultTextMessageCellAttributes, context: nil).size
+
+			return ceil(size.height) + 24.0
+		}
+		else
+		{
+			return super.tableView(tableView, estimatedHeightForRowAt: indexPath)
+		}
 	}
 }

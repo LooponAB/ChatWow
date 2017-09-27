@@ -46,7 +46,7 @@
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="54" id="h3l-7e-Yaq"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="11"/>
-                    <color key="textColor" white="0.44970507091946071" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" white="0.595947265625" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
