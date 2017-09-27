@@ -28,6 +28,12 @@ public class ChatWowViewController: UITableViewController
 	var dataSource: ChatWowDataSource? = nil
 	var delegate: ChatWowDelegate? = nil
 
+	/// The color used to fill the message bubbles from "their" messages.
+	var bubbleColorTheirs: UIColor = #colorLiteral(red: 0.8817413449, green: 0.8817413449, blue: 0.8817413449, alpha: 1)
+
+	/// The color used to fill the message bubbles from "our" messages.
+	var bubbleColorMine: UIColor = #colorLiteral(red: 0.004275974818, green: 0.478739202, blue: 0.9988952279, alpha: 1)
+
 	private var cachedCount: Int = 0
 
 	private lazy var timeLabelDateFormatter: DateFormatter =
@@ -135,6 +141,7 @@ extension ChatWowViewController
 
 		let cell = tableView.dequeueReusableCell(withIdentifier: chatMessage.viewIdentifier, for: indexPath)
 		cell.selectionStyle = .none
+		cell.tintColor = chatMessage.side == .mine ? bubbleColorMine : bubbleColorTheirs
 
 		if let chatView = cell as? ChatMessageView
 		{

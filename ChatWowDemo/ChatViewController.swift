@@ -27,11 +27,13 @@ class ChatViewController: ChatWowViewController
 		chats.sort { (msg1, msg2) -> Bool in
 			return msg1.date > msg2.date
 		}
+
+		bubbleColorMine = #colorLiteral(red: 0.9988952279, green: 0.1935456341, blue: 0.004275974818, alpha: 1)
 	}
 
 	@IBAction func addMessages(_ sender: Any)
 	{
-		var newMessages = ["A new message", "Another new message", "A message", "Oh hai", "A slightly longer message so we see it wrap"]
+		var newMessages = ["A new message", "Another new message", "A message", "Oh hai", "A slightly longer message so we see it wrap", "A string that has emojis in it 🤔🤡"]
 
 		chats.insert(ChatTextMessage(text: newMessages[Int(arc4random()) % newMessages.count], side: (arc4random() % 2) == 0 ? .mine : .theirs, date: Date()), at: 0)
 		insertMessages(newMessages: 1, scrollToBottom: true)

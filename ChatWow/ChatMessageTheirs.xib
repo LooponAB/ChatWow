@@ -35,9 +35,6 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="legOnLeft" value="YES"/>
-                        <userDefinedRuntimeAttribute type="color" keyPath="bubbleColor">
-                            <color key="value" red="0.88028971354166663" green="0.88028971354166663" blue="0.88028971354166663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQN-YQ-mpe">
@@ -51,6 +48,7 @@
                 </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="tintColor" white="0.85196940104166663" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="b43-Dg-68m" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="4" id="3Np-sM-x0K"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LQN-YQ-mpe" secondAttribute="trailing" constant="8" id="I1C-FN-yyg"/>

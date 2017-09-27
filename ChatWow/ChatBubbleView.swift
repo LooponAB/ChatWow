@@ -16,9 +16,6 @@ class ChatBubbleView: UIView
 	var legOnLeft: Bool = false
 
 	@IBInspectable
-	var bubbleColor: UIColor = #colorLiteral(red: 0.0083760079, green: 0.4918244481, blue: 0.9989399314, alpha: 1)
-
-	@IBInspectable
 	var bubbleBorderRadius: CGFloat = 12.0
 
 	override func draw(_ rect: CGRect)
@@ -35,7 +32,7 @@ class ChatBubbleView: UIView
 		{
 			//// Rectangle 2 Drawing
 			let rectangle2Path = UIBezierPath(roundedRect: CGRect(x: 8, y: 0, width: width, height: height), cornerRadius: radius)
-			bubbleColor.setFill()
+			tintColor.setFill()
 			rectangle2Path.fill()
 
 
@@ -50,7 +47,7 @@ class ChatBubbleView: UIView
 			bezier2Path.addCurve(to: CGPoint(x: 15.8, y: 25.99), controlPoint1: CGPoint(x: -0, y: 30), controlPoint2: CGPoint(x: 10.87, y: 30.48))
 			bezier2Path.addCurve(to: CGPoint(x: 8, y: 14), controlPoint1: CGPoint(x: 20.74, y: 19.99), controlPoint2: CGPoint(x: 8, y: 0))
 			bezier2Path.close()
-			bubbleColor.setFill()
+			tintColor.setFill()
 			bezier2Path.fill()
 
 			context.restoreGState()
@@ -59,7 +56,7 @@ class ChatBubbleView: UIView
 		{
 			//// Rectangle Drawing
 			let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: width, height: height), cornerRadius: radius)
-			bubbleColor.setFill()
+			tintColor.setFill()
 			rectanglePath.fill()
 
 
@@ -74,7 +71,7 @@ class ChatBubbleView: UIView
 			bezierPath.addCurve(to: CGPoint(x: 1.14, y: 25.99), controlPoint1: CGPoint(x: 16.94, y: 30), controlPoint2: CGPoint(x: 6.08, y: 30.48))
 			bezierPath.addCurve(to: CGPoint(x: 8.94, y: 14), controlPoint1: CGPoint(x: -3.8, y: 19.99), controlPoint2: CGPoint(x: 8.94, y: 0))
 			bezierPath.close()
-			bubbleColor.setFill()
+			tintColor.setFill()
 			bezierPath.fill()
 
 			context.restoreGState()
