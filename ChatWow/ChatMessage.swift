@@ -41,6 +41,14 @@ public class ChatTextMessage: ChatMessage
 	}
 }
 
+public class ChatAnnotationMessage: ChatTextMessage
+{
+	public override var viewIdentifier: String
+	{
+		return "chat_default_info"
+	}
+}
+
 public class ChatImageMessage: ChatMessage
 {
 	public var side: InterlocutorSide

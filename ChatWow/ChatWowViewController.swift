@@ -181,7 +181,14 @@ extension ChatWowViewController
 			let size = (textMessage.text as NSString).boundingRect(with: maxSize, options: [.usesLineFragmentOrigin, .usesFontLeading],
 			                                                       attributes: defaultTextMessageCellAttributes, context: nil).size
 
-			return ceil(size.height) + 24.0
+			if textMessage is ChatAnnotationMessage
+			{
+				return ceil(size.height) + 8.0
+			}
+			else
+			{
+				return ceil(size.height) + 24.0
+			}
 		}
 		else if let imageMessage = chatMessage as? ChatImageMessage
 		{
