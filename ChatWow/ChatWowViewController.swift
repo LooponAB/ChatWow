@@ -82,6 +82,28 @@ open class ChatWowViewController: UIViewController
 			]
 		}()
 
+	private lazy var defaultEmojiMessageCellAttributes: [NSAttributedStringKey: Any] =
+		{
+			let paragraph = NSMutableParagraphStyle()
+			paragraph.lineBreakMode = .byWordWrapping
+
+			return [
+				.font: UIFont.systemFont(ofSize: 40.0),
+				.paragraphStyle: paragraph
+			]
+		}()
+
+	private lazy var defaultAnnotationCellAttributes: [NSAttributedStringKey: Any] =
+		{
+			let paragraph = NSMutableParagraphStyle()
+			paragraph.lineBreakMode = .byWordWrapping
+
+			return [
+				.font: UIFont.systemFont(ofSize: 10.0),
+				.paragraphStyle: paragraph
+			]
+		}()
+
 	open override func viewDidLoad()
 	{
 		super.viewDidLoad()
@@ -279,7 +301,7 @@ extension ChatWowViewController: UITableViewDelegate, UITableViewDataSource
 			{
 				let image = imageMessage.image
 				chatView.chatImageView?.image = image
-				chatView.chatImageView?.maximumSize = CGSize(width: tableView.bounds.size.width - 116.0, height: 300.0)
+				chatView.chatImageView?.maximumSize = image.size.aspectRect(maximumSize: tableView.maxImageInCellSize)
 			}
 
 			chatView.timeLabel?.text = timeLabelDateFormatter.string(from: chatMessage.date)
@@ -296,36 +318,47 @@ extension ChatWowViewController: UITableViewDelegate, UITableViewDataSource
 		let index = chatMessageIndex(for: indexPath)
 		guard let chatMessage = dataSource?.chatController(self, chatMessageWithIndex: index) else
 		{
-			return 44.0
+			return UITableViewAutomaticDimension
 		}
 
 		if let textMessage = chatMessage as? ChatTextMessage
 		{
 			let maxSize = CGSize(width: tableView.bounds.width - 104.0, height: CGFloat.greatestFiniteMagnitude)
-			let size = (textMessage.text as NSString).boundingRect(with: maxSize, options: [.usesLineFragmentOrigin, .usesFontLeading],
-			                                                       attributes: defaultTextMessageCellAttributes, context: nil).size
 
 			if textMessage is ChatAnnotationMessage
 			{
-				return ceil(size.height) + 10.0
+				let size = (textMessage.text as NSString).boundingRect(with: maxSize, options: [.usesLineFragmentOrigin, .usesFontLeading],
+				                                                       attributes: defaultAnnotationCellAttributes, context: nil).size
+				return size.height + 10.0
 			}
 			else if textMessage.useBigEmoji
 			{
-				return ceil(size.height)
+				let size = (textMessage.text as NSString).boundingRect(with: maxSize, options: [.usesLineFragmentOrigin, .usesFontLeading],
+				                                                       attributes: defaultEmojiMessageCellAttributes, context: nil).size
+				return size.height
 			}
 			else
 			{
-				return ceil(size.height) + 24.0
+				let size = (textMessage.text as NSString).boundingRect(with: maxSize, options: [.usesLineFragmentOrigin, .usesFontLeading],
+				                                                       attributes: defaultTextMessageCellAttributes, context: nil).size
+				return size.height + 24.0
 			}
 		}
 		else if let imageMessage = chatMessage as? ChatImageMessage
 		{
-			let height = imageMessage.image.size.height
-			return min(300.0, max(80.0, height)) + 16.0
+			return imageMessage.image.size.aspectRect(maximumSize: tableView.maxImageInCellSize).height + 8.0
 		}
 		else
 		{
-			return 44.0
+			return UITableViewAutomaticDimension
 		}
+	}
+}
+
+private extension UITableView
+{
+	var maxImageInCellSize: CGSize
+	{
+		return CGSize(width: bounds.size.width - 116.0, height: 300.0)
 	}
 }
