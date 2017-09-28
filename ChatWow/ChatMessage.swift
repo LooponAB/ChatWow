@@ -22,13 +22,13 @@ public enum InterlocutorSide
 	case theirs
 }
 
-public class ChatTextMessage: ChatMessage
+open class ChatTextMessage: ChatMessage
 {
 	public var text: String
 	public var side: InterlocutorSide
 	public var date: Date
 
-	init(text: String, side: InterlocutorSide, date: Date)
+	public init(text: String, side: InterlocutorSide, date: Date)
 	{
 		self.text = text
 		self.side = side
@@ -54,7 +54,7 @@ public class ChatTextMessage: ChatMessage
 	}
 }
 
-public class ChatAnnotationMessage: ChatTextMessage
+open class ChatAnnotationMessage: ChatTextMessage
 {
 	public override var viewIdentifier: String
 	{
@@ -62,13 +62,13 @@ public class ChatAnnotationMessage: ChatTextMessage
 	}
 }
 
-public class ChatImageMessage: ChatMessage
+open class ChatImageMessage: ChatMessage
 {
 	public var side: InterlocutorSide
 	public var date: Date
 	public var image: UIImage
 
-	init(image: UIImage, side: InterlocutorSide, date: Date)
+	public init(image: UIImage, side: InterlocutorSide, date: Date)
 	{
 		self.image = image
 		self.side = side

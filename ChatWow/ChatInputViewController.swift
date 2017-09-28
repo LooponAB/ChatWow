@@ -8,24 +8,26 @@
 
 import UIKit
 
-protocol ChatInputViewControllerDelegate: class
+public protocol ChatInputViewControllerDelegate: class
 {
 	func userDidSendMessage(_ message: String)
 }
 
-class ChatInputViewController: UIViewController
+open class ChatInputViewController: UIViewController
 {
 	@IBOutlet weak var inputField: ChatInputField!
 
 	weak var delegate: ChatInputViewControllerDelegate? = nil
 
-	override func viewDidLoad() {
+	override open func viewDidLoad()
+	{
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
+    override open func didReceiveMemoryWarning()
+	{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -49,7 +51,7 @@ class ChatInputViewController: UIViewController
 
 extension ChatInputViewController: UITextFieldDelegate
 {
-	func textFieldShouldReturn(_ textField: UITextField) -> Bool
+	public func textFieldShouldReturn(_ textField: UITextField) -> Bool
 	{
 		send(textField)
 		return true

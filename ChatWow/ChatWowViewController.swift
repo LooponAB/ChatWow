@@ -27,36 +27,38 @@ public protocol ChatWowDelegate: class
 	func chatController(_ chatController: ChatWowViewController, userDidInsertMessage message: String)
 }
 
-public class ChatWowViewController: UIViewController
+open class ChatWowViewController: UIViewController
 {
-	weak var dataSource: ChatWowDataSource? = nil
-	weak var delegate: ChatWowDelegate? = nil
+	private let _tableView: UITableView = UITableView(frame: CGRect(x: 0, y: 0, width: 320, height: 240), style: .plain)
+	private var cachedCount: Int = 0
+	private var bottomConstraint: NSLayoutConstraint? = nil
+	private let _inputController: ChatInputViewController = ChatInputViewController.make()
+
+	open weak var dataSource: ChatWowDataSource? = nil
+	open weak var delegate: ChatWowDelegate? = nil
 
 	/// The color used to fill the message bubbles from "their" messages.
-	var bubbleColorTheirs: UIColor = #colorLiteral(red: 0.8817413449, green: 0.8817413449, blue: 0.8817413449, alpha: 1)
+	open var bubbleColorTheirs: UIColor = #colorLiteral(red: 0.8817413449, green: 0.8817413449, blue: 0.8817413449, alpha: 1)
 
 	/// The color used to fill the message bubbles from "our" messages.
-	var bubbleColorMine: UIColor = #colorLiteral(red: 0.004275974818, green: 0.478739202, blue: 0.9988952279, alpha: 1)
+	open var bubbleColorMine: UIColor = #colorLiteral(red: 0.004275974818, green: 0.478739202, blue: 0.9988952279, alpha: 1)
 
-	var tableView: UITableView = UITableView(frame: CGRect(x: 0, y: 0, width: 320, height: 240), style: .plain)
-
-	private var cachedCount: Int = 0
-
-	private var bottomConstraint: NSLayoutConstraint? = nil
+	open var tableView: UITableView
+	{
+		return _tableView
+	}
 
 	var keyboardSpacerConstraint: NSLayoutConstraint?
 	{
 		return bottomConstraint
 	}
 
-	private let _inputController: ChatInputViewController = ChatInputViewController.make()
-
-	var inputController: ChatInputViewController
+	open var inputController: ChatInputViewController
 	{
 		return _inputController
 	}
 
-	func clearInput()
+	open func clearInput()
 	{
 		inputController.inputField.text = ""
 	}
@@ -80,7 +82,7 @@ public class ChatWowViewController: UIViewController
 			]
 		}()
 
-	public override func viewDidLoad()
+	open override func viewDidLoad()
 	{
 		super.viewDidLoad()
 
@@ -125,7 +127,7 @@ public class ChatWowViewController: UIViewController
 		setupKeyboardDismissalAnimations()
 	}
 
-	public override func viewWillAppear(_ animated: Bool)
+	open override func viewWillAppear(_ animated: Bool)
 	{
 		super.viewWillAppear(animated)
 
@@ -173,7 +175,7 @@ public class ChatWowViewController: UIViewController
 
 extension ChatWowViewController: ChatInputViewControllerDelegate
 {
-	func userDidSendMessage(_ message: String)
+	public func userDidSendMessage(_ message: String)
 	{
 		delegate?.chatController(self, userDidInsertMessage: message)
 	}
@@ -192,7 +194,7 @@ extension ChatWowViewController: ChatKeyboardHelperViewDelegate
 
 extension ChatWowViewController // Chat interface
 {
-	func insertMessages(newMessages count: Int, scrollToBottom: Bool = false)
+	open func insertMessages(newMessages count: Int, scrollToBottom: Bool = false)
 	{
 		guard let total = dataSource?.numberOfMessages(in: self) else
 		{

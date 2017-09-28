@@ -18,37 +18,20 @@
 		0D03D4A71F7A5CB4009FF81E /* ChatWow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D03D4921F7A5CB4009FF81E /* ChatWow.framework */; };
 		0D03D4A81F7A5CB4009FF81E /* ChatWow.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0D03D4921F7A5CB4009FF81E /* ChatWow.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0D03D4B21F7A5CD8009FF81E /* ChatWowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D03D4B01F7A5CD8009FF81E /* ChatWowViewController.swift */; };
-		0D0A026A1F7BC33A00B85D97 /* ChatImageMine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D0A02691F7BC33A00B85D97 /* ChatImageMine.xib */; };
 		0D0A026B1F7BC33A00B85D97 /* ChatImageMine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D0A02691F7BC33A00B85D97 /* ChatImageMine.xib */; };
-		0D0A026D1F7BC91500B85D97 /* ChatImageTheirs.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D0A026C1F7BC4E500B85D97 /* ChatImageTheirs.xib */; };
 		0D0A026E1F7BC91500B85D97 /* ChatImageTheirs.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D0A026C1F7BC4E500B85D97 /* ChatImageTheirs.xib */; };
-		0D0A02701F7BE74200B85D97 /* ChatImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A026F1F7BE74200B85D97 /* ChatImageView.swift */; };
 		0D0A02711F7BE74200B85D97 /* ChatImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A026F1F7BE74200B85D97 /* ChatImageView.swift */; };
-		0D0A02741F7BF5DA00B85D97 /* ChatInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A02721F7BF5DA00B85D97 /* ChatInputViewController.swift */; };
 		0D0A02751F7BF5DA00B85D97 /* ChatInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A02721F7BF5DA00B85D97 /* ChatInputViewController.swift */; };
-		0D0A02761F7BF5DA00B85D97 /* ChatInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D0A02731F7BF5DA00B85D97 /* ChatInputViewController.xib */; };
 		0D0A02771F7BF5DA00B85D97 /* ChatInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D0A02731F7BF5DA00B85D97 /* ChatInputViewController.xib */; };
-		0D0A02791F7BF63700B85D97 /* ChatInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A02781F7BF63700B85D97 /* ChatInputField.swift */; };
 		0D0A027A1F7BF63700B85D97 /* ChatInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A02781F7BF63700B85D97 /* ChatInputField.swift */; };
-		0D4A6FBE1F7A6A6B00731719 /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4A6FBD1F7A6A6B00731719 /* ChatMessageView.swift */; };
 		0D4A6FBF1F7A6A6B00731719 /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4A6FBD1F7A6A6B00731719 /* ChatMessageView.swift */; };
-		0D4A6FC11F7A85FA00731719 /* ChatMessageMine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4A6FC01F7A85FA00731719 /* ChatMessageMine.xib */; };
 		0D4A6FC21F7A85FA00731719 /* ChatMessageMine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4A6FC01F7A85FA00731719 /* ChatMessageMine.xib */; };
-		0D4A6FC41F7A868A00731719 /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4A6FC31F7A868A00731719 /* ChatBubbleView.swift */; };
 		0D4A6FC51F7A868A00731719 /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4A6FC31F7A868A00731719 /* ChatBubbleView.swift */; };
-		0D4A6FC81F7A964900731719 /* ChatWowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D03D4B01F7A5CD8009FF81E /* ChatWowViewController.swift */; };
-		0D4A6FCA1F7AA05000731719 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4A6FC91F7AA04F00731719 /* ChatMessage.swift */; };
 		0D4A6FCB1F7AA05000731719 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4A6FC91F7AA04F00731719 /* ChatMessage.swift */; };
 		0D4A6FCC1F7AA62200731719 /* ChatMessageTheirs.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4A6FC71F7A91CF00731719 /* ChatMessageTheirs.xib */; };
-		0D4A6FCD1F7AA62300731719 /* ChatMessageTheirs.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4A6FC71F7A91CF00731719 /* ChatMessageTheirs.xib */; };
-		0D4A6FD51F7AB88F00731719 /* ChatInfoLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4A6FD21F7AB88F00731719 /* ChatInfoLineCell.xib */; };
 		0D4A6FD61F7AB88F00731719 /* ChatInfoLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4A6FD21F7AB88F00731719 /* ChatInfoLineCell.xib */; };
 		0DFE54A41F7C0D02001B212B /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DFE54A31F7C0D02001B212B /* Media.xcassets */; };
-		0DFE54A51F7C0DD6001B212B /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DFE54A31F7C0D02001B212B /* Media.xcassets */; };
-		0DFE54AF1F7C2670001B212B /* ChatKeyboardHelperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFE54AE1F7C2670001B212B /* ChatKeyboardHelperView.swift */; };
 		0DFE54B01F7C2670001B212B /* ChatKeyboardHelperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFE54AE1F7C2670001B212B /* ChatKeyboardHelperView.swift */; };
-		0DFE54B31F7C3202001B212B /* ChatEmojiMessageMine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFE54B11F7C2D66001B212B /* ChatEmojiMessageMine.xib */; };
-		0DFE54B41F7C3202001B212B /* ChatEmojiMessageTheirs.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFE54B21F7C2DDC001B212B /* ChatEmojiMessageTheirs.xib */; };
 		0DFE54B51F7C3203001B212B /* ChatEmojiMessageMine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFE54B11F7C2D66001B212B /* ChatEmojiMessageMine.xib */; };
 		0DFE54B61F7C3203001B212B /* ChatEmojiMessageTheirs.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFE54B21F7C2DDC001B212B /* ChatEmojiMessageTheirs.xib */; };
 /* End PBXBuildFile section */
@@ -341,18 +324,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0DFE54A51F7C0DD6001B212B /* Media.xcassets in Resources */,
 				0D03D4861F7A5C99009FF81E /* LaunchScreen.storyboard in Resources */,
-				0D0A02761F7BF5DA00B85D97 /* ChatInputViewController.xib in Resources */,
-				0D4A6FD51F7AB88F00731719 /* ChatInfoLineCell.xib in Resources */,
-				0D0A026A1F7BC33A00B85D97 /* ChatImageMine.xib in Resources */,
 				0D03D4831F7A5C99009FF81E /* Assets.xcassets in Resources */,
-				0D4A6FCD1F7AA62300731719 /* ChatMessageTheirs.xib in Resources */,
-				0D4A6FC11F7A85FA00731719 /* ChatMessageMine.xib in Resources */,
-				0DFE54B31F7C3202001B212B /* ChatEmojiMessageMine.xib in Resources */,
-				0D0A026D1F7BC91500B85D97 /* ChatImageTheirs.xib in Resources */,
 				0D03D4811F7A5C99009FF81E /* Main.storyboard in Resources */,
-				0DFE54B41F7C3202001B212B /* ChatEmojiMessageTheirs.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,16 +360,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0D4A6FBE1F7A6A6B00731719 /* ChatMessageView.swift in Sources */,
 				0D03D47E1F7A5C99009FF81E /* ChatViewController.swift in Sources */,
-				0DFE54AF1F7C2670001B212B /* ChatKeyboardHelperView.swift in Sources */,
 				0D03D47C1F7A5C99009FF81E /* AppDelegate.swift in Sources */,
-				0D0A02791F7BF63700B85D97 /* ChatInputField.swift in Sources */,
-				0D4A6FCA1F7AA05000731719 /* ChatMessage.swift in Sources */,
-				0D0A02701F7BE74200B85D97 /* ChatImageView.swift in Sources */,
-				0D4A6FC81F7A964900731719 /* ChatWowViewController.swift in Sources */,
-				0D4A6FC41F7A868A00731719 /* ChatBubbleView.swift in Sources */,
-				0D0A02741F7BF5DA00B85D97 /* ChatInputViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
