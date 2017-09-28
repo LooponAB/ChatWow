@@ -29,7 +29,6 @@ public protocol ChatWowDelegate: class
 
 open class ChatWowViewController: UIViewController
 {
-	private let _tableView: UITableView = UITableView(frame: CGRect(x: 0, y: 0, width: 320, height: 240), style: .plain)
 	private var cachedCount: Int = 0
 	private var bottomConstraint: NSLayoutConstraint? = nil
 	private let _inputController: ChatInputViewController = ChatInputViewController.make()
@@ -43,10 +42,7 @@ open class ChatWowViewController: UIViewController
 	/// The color used to fill the message bubbles from "our" messages.
 	open var bubbleColorMine: UIColor = #colorLiteral(red: 0.004275974818, green: 0.478739202, blue: 0.9988952279, alpha: 1)
 
-	open var tableView: UITableView
-	{
-		return _tableView
-	}
+	open let tableView: UITableView = UITableView(frame: CGRect(x: 0, y: 0, width: 320, height: 240), style: .plain)
 
 	var keyboardSpacerConstraint: NSLayoutConstraint?
 	{
@@ -141,6 +137,7 @@ open class ChatWowViewController: UIViewController
 		tableView.register(UINib(nibName: "ChatEmojiMessageTheirs", bundle: bundle), forCellReuseIdentifier: "chat_default_emoji_theirs")
 		tableView.register(UINib(nibName: "ChatInfoLineCell", bundle: bundle), forCellReuseIdentifier: "chat_default_info")
 		tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: inputController.view.bounds.height + 20.0, right: 0)
+		tableView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: inputController.view.bounds.height, right: 0)
 		tableView.backgroundColor = .white
 		tableView.separatorStyle = .none
 		tableView.keyboardDismissMode = .interactive
@@ -323,7 +320,7 @@ extension ChatWowViewController: UITableViewDelegate, UITableViewDataSource
 
 		if let textMessage = chatMessage as? ChatTextMessage
 		{
-			let maxSize = CGSize(width: tableView.bounds.width - 104.0, height: CGFloat.greatestFiniteMagnitude)
+			let maxSize = CGSize(width: tableView.bounds.width - 108.0, height: CGFloat.greatestFiniteMagnitude)
 
 			if textMessage is ChatAnnotationMessage
 			{
@@ -359,6 +356,6 @@ private extension UITableView
 {
 	var maxImageInCellSize: CGSize
 	{
-		return CGSize(width: bounds.size.width - 116.0, height: 300.0)
+		return CGSize(width: bounds.size.width - 120.0, height: 300.0)
 	}
 }

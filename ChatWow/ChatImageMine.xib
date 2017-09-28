@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,7 +28,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="5OB-Xx-Cp1" customClass="ChatImageView" customModule="ChatWow" customModuleProvider="target">
-                        <rect key="frame" x="82" y="4" width="293" height="111.5"/>
+                        <rect key="frame" x="82" y="4" width="289" height="111.5"/>
                     </imageView>
                 </subviews>
                 <constraints>
@@ -36,7 +37,7 @@
                     <constraint firstItem="hQe-uA-Sdo" firstAttribute="leading" secondItem="uLO-1c-ll5" secondAttribute="leading" constant="20" id="KpX-qw-3AL"/>
                     <constraint firstItem="5OB-Xx-Cp1" firstAttribute="leading" secondItem="hQe-uA-Sdo" secondAttribute="trailing" constant="8" id="Q1x-Me-iOk"/>
                     <constraint firstAttribute="bottom" secondItem="hQe-uA-Sdo" secondAttribute="bottom" constant="8" id="YKa-cM-ls8"/>
-                    <constraint firstAttribute="trailing" secondItem="5OB-Xx-Cp1" secondAttribute="trailing" id="fzz-Vz-MaF"/>
+                    <constraint firstAttribute="trailing" secondItem="5OB-Xx-Cp1" secondAttribute="trailing" constant="4" id="fzz-Vz-MaF"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
