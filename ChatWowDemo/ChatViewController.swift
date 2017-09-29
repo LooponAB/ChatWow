@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import ChatWow
+//import ChatWow
 
 class ChatViewController: ChatWowViewController
 {
@@ -15,12 +15,10 @@ class ChatViewController: ChatWowViewController
 
 	override func viewDidLoad()
 	{
-		super.viewDidLoad()
-
 		dataSource = self
 		delegate = self
 
-		for i in 0..<32
+		for i in 0..<6
 		{
 			let date = Date(timeIntervalSinceNow: 60 * TimeInterval(arc4random() % 360) * -1)
 			chats.append(ChatTextMessage(text: "Lorem ipsum dolor sit amet! Lorem ipsum dolor sit amet! Lorem ipsum dolor sit amet!  \(i)", side: (i % 2 == 0) ? .mine : .theirs, date: date))
@@ -33,6 +31,8 @@ class ChatViewController: ChatWowViewController
 		chats.insert(ChatAnnotationMessage(text: "John Appleseed has gone offline", side: .theirs, date: Date()), at: 0)
 
 		bubbleColorMine = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+
+		super.viewDidLoad()
 	}
 
 	@IBAction func addMessages(_ sender: Any)
@@ -66,6 +66,11 @@ class ChatViewController: ChatWowViewController
 		}
 
 		insertMessages(newMessages: 1, scrollToBottom: true)
+
+		DispatchQueue.main.asyncAfter(deadline: .now() + 2.5)
+			{
+				self.updateReadInfo()
+			}
 	}
 }
 
@@ -76,9 +81,14 @@ extension ChatViewController: ChatWowDataSource
 		return chats.count
 	}
 
-	func chatController(_ chatController: ChatWowViewController, chatMessageWithIndex index: Int) -> ChatMessage
+	func chatController(_ chatController: ChatWowViewController, chatMessageWith index: Int) -> ChatMessage
 	{
 		return chats[index]
+	}
+
+	func chatController(_ chatController: ChatWowViewController, readDateForMessageWith index: Int) -> Date?
+	{
+		return index < 2 ? nil : chats[4].date
 	}
 }
 

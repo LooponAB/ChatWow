@@ -15,7 +15,10 @@ public protocol ChatWowDataSource: class
 
 	/// The message to be displayed at a certain position from the bottom of the view. Messages should be indexed by date, with the most
 	/// recent message on index `0`.
-	func chatController(_ chatController: ChatWowViewController, chatMessageWithIndex index: Int) -> ChatMessage
+	func chatController(_ chatController: ChatWowViewController, chatMessageWith index: Int) -> ChatMessage
+
+	/// The read time stamp for the message. Return `nil` if the message has not yet been read.
+	func chatController(_ chatController: ChatWowViewController, readDateForMessageWith index: Int) -> Date?
 }
 
 public protocol ChatWowDelegate: class
@@ -33,6 +36,9 @@ open class ChatWowViewController: UIViewController
 	private var bottomConstraint: NSLayoutConstraint? = nil
 	private let _inputController: ChatInputViewController = ChatInputViewController.make()
 
+//	private var extraMessages: [Int: ChatMessage] = [:]
+	private var lastReadMessageInfo: (index: Int, date: Date)? = nil
+
 	open weak var dataSource: ChatWowDataSource? = nil
 	open weak var delegate: ChatWowDelegate? = nil
 
@@ -42,7 +48,25 @@ open class ChatWowViewController: UIViewController
 	/// The color used to fill the message bubbles from "our" messages.
 	open var bubbleColorMine: UIColor = #colorLiteral(red: 0.004275974818, green: 0.478739202, blue: 0.9988952279, alpha: 1)
 
-	open let tableView: UITableView = UITableView(frame: CGRect(x: 0, y: 0, width: 320, height: 240), style: .plain)
+	/// The table view used to render the chat. Don't call `reloadSections(_:with:)` or `reloadRows(at:with:)`, as those are disabled.
+	open let tableView: UITableView = ChatTableView(frame: CGRect(x: 0, y: 0, width: 320, height: 240), style: .plain)
+
+	open lazy var readDateFormatter: DateFormatter =
+		{
+			let formatter = DateFormatter()
+			formatter.dateStyle = .short
+			formatter.timeStyle = .short
+			return formatter
+		}()
+
+	open lazy var messageDateFormatter: DateFormatter =
+		{
+			let formatter = DateFormatter()
+			formatter.dateStyle = .none
+			formatter.timeStyle = .short
+			return formatter
+		}()
+
 
 	var keyboardSpacerConstraint: NSLayoutConstraint?
 	{
@@ -58,14 +82,6 @@ open class ChatWowViewController: UIViewController
 	{
 		inputController.inputField.text = ""
 	}
-
-	private lazy var timeLabelDateFormatter: DateFormatter =
-		{
-			let formatter = DateFormatter()
-			formatter.dateStyle = .none
-			formatter.timeStyle = .short
-			return formatter
-		}()
 
 	private lazy var defaultTextMessageCellAttributes: [NSAttributedStringKey: Any] =
 		{
@@ -85,17 +101,6 @@ open class ChatWowViewController: UIViewController
 
 			return [
 				.font: UIFont.systemFont(ofSize: 40.0),
-				.paragraphStyle: paragraph
-			]
-		}()
-
-	private lazy var defaultAnnotationCellAttributes: [NSAttributedStringKey: Any] =
-		{
-			let paragraph = NSMutableParagraphStyle()
-			paragraph.lineBreakMode = .byWordWrapping
-
-			return [
-				.font: UIFont.systemFont(ofSize: 10.0),
 				.paragraphStyle: paragraph
 			]
 		}()
@@ -190,6 +195,32 @@ open class ChatWowViewController: UIViewController
 	{
 		NotificationCenter.default.removeObserver(self)
 	}
+
+	private func reindexLastReadMessage()
+	{
+		lastReadMessageInfo = nil
+		cachedCount = dataSource?.numberOfMessages(in: self) ?? 0
+
+		guard cachedCount > 0 else
+		{
+			return
+		}
+
+		var lastReadInfo: (Int, Date)? = nil
+
+		for index in (0..<cachedCount).reversed()
+		{
+			if let message = dataSource?.chatController(self, chatMessageWith: index)
+			{
+				if message.side == .mine, let readDate = dataSource?.chatController(self, readDateForMessageWith: index)
+				{
+					lastReadInfo = (index, readDate)
+				}
+			}
+		}
+
+		lastReadMessageInfo = lastReadInfo
+	}
 }
 
 extension ChatWowViewController: ChatInputViewControllerDelegate
@@ -224,7 +255,12 @@ extension ChatWowViewController // Chat interface
 
 		for i in total - count ..< total
 		{
-			indexPaths.append(IndexPath(row: i, section: 0))
+			indexPaths.append(IndexPath(row: i + (lastReadMessageInfo != nil ? 1 : 0), section: 0))
+		}
+
+		if let readInfo = lastReadMessageInfo
+		{
+			lastReadMessageInfo = (index: readInfo.index + count, date: readInfo.date)
 		}
 
 		tableView.insertRows(at: indexPaths, with: .left)
@@ -237,32 +273,99 @@ extension ChatWowViewController // Chat interface
 		}
 	}
 
+	func updateReadInfo()
+	{
+		let previousIndexPath = indexPath(for: .readAnnotation(Date()))
+
+		reindexLastReadMessage()
+
+		if let previousIndexPath = previousIndexPath, let newIndexPath = indexPath(for: .readAnnotation(Date()))
+		{
+			tableView.moveRow(at: previousIndexPath, to: newIndexPath)
+		}
+		else if let newIndexPath = indexPath(for: .readAnnotation(Date()))
+		{
+			tableView.insertRows(at: [newIndexPath], with: .top)
+		}
+	}
+
 	func scrollToBottom(animated: Bool)
 	{
-		guard let indexPath = indexPath(for: 0) else { return }
+		guard let indexPath = indexPath(for: .normal(0)) else { return }
 		tableView.scrollToRow(at: indexPath, at: .bottom, animated: animated)
 	}
 }
 
-extension ChatWowViewController: UITableViewDelegate, UITableViewDataSource
+internal enum MessageIndex
+{
+	case normal(Int)
+	case readAnnotation(Date)
+}
+
+extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 {
 	/// This is where the magic of showing messages from top to bottom happens. We need to flip the default indexPath ordering (which
 	/// is 0..<count) to the inverted chat message ordering (which is (count-1)...0).
-	private func chatMessageIndex(for indexPath: IndexPath) -> Int
+	private func chatMessageIndex(for indexPath: IndexPath) -> MessageIndex
 	{
-		return cachedCount - indexPath.row - 1
+		if let lastReadInfo = lastReadMessageInfo
+		{
+			let row = cachedCount - indexPath.row
+
+			if row == lastReadInfo.index
+			{
+				return .readAnnotation(lastReadInfo.date)
+			}
+			else if row < lastReadInfo.index
+			{
+				return .normal(row)
+			}
+			else
+			{
+				return .normal(row - 1)
+			}
+		}
+		else
+		{
+			return .normal(cachedCount - indexPath.row - 1)
+		}
 	}
 
-	private func indexPath(for messageIndex: Int) -> IndexPath?
+	private func indexPath(for messageIndex: MessageIndex) -> IndexPath?
 	{
-		let row = (cachedCount - 1) - messageIndex
-
-		guard row >= 0 else
+		switch messageIndex
 		{
-			return nil
-		}
+		case .normal(let index):
+			let row = cachedCount - index
 
-		return IndexPath(row: row, section: 0)
+			if let lastReadIndex = lastReadMessageInfo?.index, index < lastReadIndex
+			{
+				return IndexPath(row: row, section: 0)
+			}
+			else if row > 0
+			{
+				return IndexPath(row: row - 1, section: 0)
+			}
+			else
+			{
+				return nil
+			}
+
+		case .readAnnotation(_):
+			if let annotationIndex = lastReadMessageInfo?.index
+			{
+				return IndexPath(row: cachedCount - annotationIndex, section: 0)
+			}
+			else
+			{
+				return nil
+			}
+		}
+	}
+
+	func tableViewWillReloadData(_ tableView: ChatTableView)
+	{
+		reindexLastReadMessage()
 	}
 
 	public func numberOfSections(in tableView: UITableView) -> Int
@@ -273,15 +376,27 @@ extension ChatWowViewController: UITableViewDelegate, UITableViewDataSource
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
 		cachedCount = dataSource?.numberOfMessages(in: self) ?? 0
-		return cachedCount
+		return cachedCount + (lastReadMessageInfo != nil ? 1 : 0)
 	}
 
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-		let index = chatMessageIndex(for: indexPath)
-		guard let chatMessage = dataSource?.chatController(self, chatMessageWithIndex: index) else
+		guard let dataSource = self.dataSource else
 		{
 			return UITableViewCell(style: .default, reuseIdentifier: "blank_cell")
+		}
+
+		let chatIndex = chatMessageIndex(for: indexPath)
+		let chatMessage: ChatMessage
+
+		switch chatIndex
+		{
+		case .readAnnotation(let date):
+			let readLabel = String(format: NSLocalizedString("Read %@", comment: ""), readDateFormatter.string(from: date))
+			chatMessage = ChatReadAnnotationMessage(text: readLabel, side: .mine, date: date)
+
+		case .normal(let index):
+			chatMessage = dataSource.chatController(self, chatMessageWith: index)
 		}
 
 		let cell = tableView.dequeueReusableCell(withIdentifier: chatMessage.viewIdentifier, for: indexPath)
@@ -301,7 +416,16 @@ extension ChatWowViewController: UITableViewDelegate, UITableViewDataSource
 				chatView.chatImageView?.maximumSize = image.size.aspectRect(maximumSize: tableView.maxImageInCellSize)
 			}
 
-			chatView.timeLabel?.text = timeLabelDateFormatter.string(from: chatMessage.date)
+			if chatMessage is ChatReadAnnotationMessage
+			{
+				chatView.chatLabel?.textAlignment = .right
+			}
+			else if chatMessage is ChatAnnotationMessage
+			{
+				chatView.chatLabel?.textAlignment = .center
+			}
+
+			chatView.timeLabel?.text = messageDateFormatter.string(from: chatMessage.date)
 
 			delegate?.chatController(self, prepareChatView: chatView)
 		}
@@ -312,10 +436,22 @@ extension ChatWowViewController: UITableViewDelegate, UITableViewDataSource
 	// Tries to estimate the cell height only for cell types whose behavior we can predict.
 	public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat
 	{
-		let index = chatMessageIndex(for: indexPath)
-		guard let chatMessage = dataSource?.chatController(self, chatMessageWithIndex: index) else
+		guard let dataSource = self.dataSource else
 		{
 			return UITableViewAutomaticDimension
+		}
+
+		let chatIndex = chatMessageIndex(for: indexPath)
+		let chatMessage: ChatMessage
+
+		switch chatIndex
+		{
+		case .readAnnotation(_):
+			/// The "read" row is an annotation row, with fixed height.
+			return 24.0
+
+		case .normal(let index):
+			chatMessage = dataSource.chatController(self, chatMessageWith: index)
 		}
 
 		if let textMessage = chatMessage as? ChatTextMessage
@@ -324,9 +460,8 @@ extension ChatWowViewController: UITableViewDelegate, UITableViewDataSource
 
 			if textMessage is ChatAnnotationMessage
 			{
-				let size = (textMessage.text as NSString).boundingRect(with: maxSize, options: [.usesLineFragmentOrigin, .usesFontLeading],
-				                                                       attributes: defaultAnnotationCellAttributes, context: nil).size
-				return size.height + 10.0
+				/// Annotation rows have a fixed height
+				return 24.0
 			}
 			else if textMessage.useBigEmoji
 			{

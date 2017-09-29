@@ -81,6 +81,10 @@ open class ChatImageMessage: ChatMessage
 	}
 }
 
+internal class ChatReadAnnotationMessage: ChatAnnotationMessage
+{
+}
+
 extension String
 {
 	var isPureEmoji: Bool
