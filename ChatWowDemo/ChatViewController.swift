@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import ChatWow
+import ChatWow
 
 class ChatViewController: ChatWowViewController
 {
