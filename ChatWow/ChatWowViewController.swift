@@ -141,6 +141,7 @@ open class ChatWowViewController: UIViewController
 		tableView.register(UINib(nibName: "ChatEmojiMessageMine", bundle: bundle), forCellReuseIdentifier: "chat_default_emoji_mine")
 		tableView.register(UINib(nibName: "ChatEmojiMessageTheirs", bundle: bundle), forCellReuseIdentifier: "chat_default_emoji_theirs")
 		tableView.register(UINib(nibName: "ChatInfoLineCell", bundle: bundle), forCellReuseIdentifier: "chat_default_info")
+		tableView.register(UINib(nibName: "ChatInfoLineWithTimeCell", bundle: bundle), forCellReuseIdentifier: "chat_default_info_with_time")
 		tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: inputController.view.bounds.height + 20.0, right: 0)
 		tableView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: inputController.view.bounds.height, right: 0)
 		tableView.backgroundColor = .white

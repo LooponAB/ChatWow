@@ -25,6 +25,7 @@
 		0D0A02771F7BF5DA00B85D97 /* ChatInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D0A02731F7BF5DA00B85D97 /* ChatInputViewController.xib */; };
 		0D0A027A1F7BF63700B85D97 /* ChatInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A02781F7BF63700B85D97 /* ChatInputField.swift */; };
 		0D0EEA111F7E5B350039A083 /* ChatTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0EEA101F7E5B350039A083 /* ChatTableView.swift */; };
+		0D2A40301F82594D00EAF879 /* ChatInfoLineWithTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D2A402F1F8258FA00EAF879 /* ChatInfoLineWithTimeCell.xib */; };
 		0D4A6FBF1F7A6A6B00731719 /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4A6FBD1F7A6A6B00731719 /* ChatMessageView.swift */; };
 		0D4A6FC21F7A85FA00731719 /* ChatMessageMine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4A6FC01F7A85FA00731719 /* ChatMessageMine.xib */; };
 		0D4A6FC51F7A868A00731719 /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4A6FC31F7A868A00731719 /* ChatBubbleView.swift */; };
@@ -114,6 +115,7 @@
 		0D0A02731F7BF5DA00B85D97 /* ChatInputViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatInputViewController.xib; sourceTree = "<group>"; };
 		0D0A02781F7BF63700B85D97 /* ChatInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInputField.swift; sourceTree = "<group>"; };
 		0D0EEA101F7E5B350039A083 /* ChatTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableView.swift; sourceTree = "<group>"; };
+		0D2A402F1F8258FA00EAF879 /* ChatInfoLineWithTimeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatInfoLineWithTimeCell.xib; sourceTree = "<group>"; };
 		0D4A6FBD1F7A6A6B00731719 /* ChatMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageView.swift; sourceTree = "<group>"; };
 		0D4A6FC01F7A85FA00731719 /* ChatMessageMine.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMessageMine.xib; sourceTree = "<group>"; };
 		0D4A6FC31F7A868A00731719 /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				0D4A6FC01F7A85FA00731719 /* ChatMessageMine.xib */,
 				0D4A6FC71F7A91CF00731719 /* ChatMessageTheirs.xib */,
 				0D4A6FD21F7AB88F00731719 /* ChatInfoLineCell.xib */,
+				0D2A402F1F8258FA00EAF879 /* ChatInfoLineWithTimeCell.xib */,
 				0D0A02691F7BC33A00B85D97 /* ChatImageMine.xib */,
 				0D0A026C1F7BC4E500B85D97 /* ChatImageTheirs.xib */,
 				0DFE54B11F7C2D66001B212B /* ChatEmojiMessageMine.xib */,
@@ -364,6 +367,7 @@
 			files = (
 				0D4A6FCC1F7AA62200731719 /* ChatMessageTheirs.xib in Resources */,
 				0D0A02771F7BF5DA00B85D97 /* ChatInputViewController.xib in Resources */,
+				0D2A40301F82594D00EAF879 /* ChatInfoLineWithTimeCell.xib in Resources */,
 				0DFE54B61F7C3203001B212B /* ChatEmojiMessageTheirs.xib in Resources */,
 				0DFE54A41F7C0D02001B212B /* Media.xcassets in Resources */,
 				0DFE54B51F7C3203001B212B /* ChatEmojiMessageMine.xib in Resources */,

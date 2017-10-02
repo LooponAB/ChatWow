@@ -58,7 +58,7 @@ open class ChatAnnotationMessage: ChatTextMessage
 {
 	public override var viewIdentifier: String
 	{
-		return "chat_default_info"
+		return "chat_default_info_with_time"
 	}
 }
 
@@ -83,6 +83,11 @@ open class ChatImageMessage: ChatMessage
 
 internal class ChatReadAnnotationMessage: ChatAnnotationMessage
 {
+	override var viewIdentifier: String
+	{
+		return "chat_default_info"
+	}
+
 }
 
 extension String
