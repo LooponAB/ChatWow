@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -39,11 +40,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="lKY-3V-36B" secondAttribute="trailing" id="Cwi-P4-1Ab"/>
+                            <constraint firstItem="cXS-oE-O6l" firstAttribute="top" secondItem="eja-Ua-pJm" secondAttribute="top" constant="5" id="G9j-lC-PP7"/>
                             <constraint firstItem="cXS-oE-O6l" firstAttribute="centerY" secondItem="eja-Ua-pJm" secondAttribute="centerY" id="HtS-vV-QyC"/>
+                            <constraint firstAttribute="height" constant="23" id="JWn-iJ-vM0"/>
+                            <constraint firstAttribute="bottom" secondItem="cXS-oE-O6l" secondAttribute="bottom" constant="5" id="Sdm-Km-UT3"/>
                             <constraint firstItem="lKY-3V-36B" firstAttribute="baseline" secondItem="cXS-oE-O6l" secondAttribute="baseline" id="YZw-Tc-ARB"/>
                             <constraint firstItem="lKY-3V-36B" firstAttribute="leading" secondItem="cXS-oE-O6l" secondAttribute="trailing" constant="8" id="l1n-yC-Ndg"/>
                             <constraint firstItem="cXS-oE-O6l" firstAttribute="leading" secondItem="eja-Ua-pJm" secondAttribute="leading" id="o14-t8-g5g"/>
-                            <constraint firstAttribute="height" constant="23" id="qkK-bT-qbZ"/>
                         </constraints>
                     </view>
                 </subviews>

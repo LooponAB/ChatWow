@@ -12,6 +12,7 @@ public protocol ChatMessage
 {
 	var side: InterlocutorSide { get }
 	var date: Date { get }
+	var showTimestamp: Bool { get }
 
 	var viewIdentifier: String { get }
 }
@@ -27,12 +28,14 @@ open class ChatTextMessage: ChatMessage
 	public var text: String
 	public var side: InterlocutorSide
 	public var date: Date
+	public var showTimestamp: Bool
 
-	public init(text: String, side: InterlocutorSide, date: Date)
+	public init(text: String, side: InterlocutorSide, date: Date, showTimestamp: Bool = true)
 	{
 		self.text = text
 		self.side = side
 		self.date = date
+		self.showTimestamp = showTimestamp
 	}
 
 	var useBigEmoji: Bool
@@ -67,12 +70,14 @@ open class ChatImageMessage: ChatMessage
 	public var side: InterlocutorSide
 	public var date: Date
 	public var image: UIImage
+	public var showTimestamp: Bool
 
-	public init(image: UIImage, side: InterlocutorSide, date: Date)
+	public init(image: UIImage, side: InterlocutorSide, date: Date, showTimestamp: Bool = true)
 	{
 		self.image = image
 		self.side = side
 		self.date = date
+		self.showTimestamp = showTimestamp
 	}
 
 	public var viewIdentifier: String
@@ -94,9 +99,16 @@ extension String
 {
 	var isPureEmoji: Bool
 	{
+		guard (self as NSString).responds(to: Selector(("_containsEmoji"))) else
+		{
+			return false
+		}
+
 		for character in self
 		{
-			if let result = (String(character) as NSString).value(forKey: "_containsEmoji") as? Bool, !result
+			let charString = String(character) as NSString
+
+			if let result = charString.value(forKey: "_containsEmoji") as? Bool, !result
 			{
 				return false
 			}

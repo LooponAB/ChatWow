@@ -67,7 +67,6 @@ open class ChatWowViewController: UIViewController
 			return formatter
 		}()
 
-
 	var keyboardSpacerConstraint: NSLayoutConstraint?
 	{
 		return bottomConstraint
@@ -211,12 +210,12 @@ open class ChatWowViewController: UIViewController
 
 		for index in (0..<cachedCount).reversed()
 		{
-			if let message = dataSource?.chatController(self, chatMessageWith: index)
+			if let message = dataSource?.chatController(self, chatMessageWith: index),
+			   !(message is ChatAnnotationMessage),
+			   message.side == .mine,
+			   let readDate = dataSource?.chatController(self, readDateForMessageWith: index)
 			{
-				if message.side == .mine, let readDate = dataSource?.chatController(self, readDateForMessageWith: index)
-				{
-					lastReadInfo = (index, readDate)
-				}
+				lastReadInfo = (index, readDate)
 			}
 		}
 
@@ -427,7 +426,14 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 				chatView.chatLabel?.textAlignment = .center
 			}
 
-			chatView.timeLabel?.text = messageDateFormatter.string(from: chatMessage.date)
+			if chatMessage.showTimestamp
+			{
+				chatView.timeLabel?.text = messageDateFormatter.string(from: chatMessage.date)
+			}
+			else
+			{
+				chatView.timeLabel?.text = nil
+			}
 
 			delegate?.chatController(self, prepareChatView: chatView)
 		}
