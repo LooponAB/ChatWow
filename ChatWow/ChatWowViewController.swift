@@ -24,7 +24,7 @@ public protocol ChatWowDataSource: class
 public protocol ChatWowDelegate: class
 {
 	/// Called when a chat bubble is about to be displayed. Can be used to setup custom chat bubble views.
-	func chatController(_ chatController: ChatWowViewController, prepareChatView cellView: ChatMessageView)
+	func chatController(_ chatController: ChatWowViewController, prepare cellView: ChatMessageView, for message: ChatMessage)
 
 	/// Called when the user taps the "send" button, or taps/presses the return key on the keyboard.
 	func chatController(_ chatController: ChatWowViewController, userDidInsertMessage message: String)
@@ -435,7 +435,7 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 				chatView.timeLabel?.text = nil
 			}
 
-			delegate?.chatController(self, prepareChatView: chatView)
+			delegate?.chatController(self, prepare: chatView, for: chatMessage)
 		}
 
 		return cell

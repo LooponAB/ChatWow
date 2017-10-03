@@ -11,9 +11,9 @@ import UIKit
 /// The view used for each individual chat message.
 public class ChatMessageView: UITableViewCell
 {
-	@IBOutlet var chatLabel: UILabel?
-	@IBOutlet var timeLabel: UILabel?
-	@IBOutlet var chatImageView: ChatImageView?
+	@IBOutlet open var chatLabel: UILabel?
+	@IBOutlet open var timeLabel: UILabel?
+	@IBOutlet open var chatImageView: ChatImageView?
 
 	public override var frame: CGRect
 	{

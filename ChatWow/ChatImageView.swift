@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class ChatImageView: UIImageView
+open class ChatImageView: UIImageView
 {
 	lazy var maximumSize: CGSize =
 	{
@@ -37,7 +37,7 @@ class ChatImageView: UIImageView
 		setupMaskBubble()
 	}
 
-	required init?(coder aDecoder: NSCoder)
+	required public init?(coder aDecoder: NSCoder)
 	{
 		super.init(coder: aDecoder)
 
@@ -51,7 +51,7 @@ class ChatImageView: UIImageView
 		mask?.setNeedsDisplay()
 	}
 
-	override var bounds: CGRect
+	override open var bounds: CGRect
 	{
 		didSet
 		{
@@ -75,7 +75,7 @@ class ChatImageView: UIImageView
 		}
 	}
 
-	override var intrinsicContentSize: CGSize
+	override open var intrinsicContentSize: CGSize
 	{
 		return image?.size.aspectRect(maximumSize: maximumSize) ?? maximumSize
 	}
