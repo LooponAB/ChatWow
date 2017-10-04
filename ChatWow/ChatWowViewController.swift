@@ -35,6 +35,7 @@ open class ChatWowViewController: UIViewController
 	private var cachedCount: Int = 0
 	private var bottomConstraint: NSLayoutConstraint? = nil
 	private let _inputController: ChatInputViewController = ChatInputViewController.make()
+	private var firstLoadHappened = false
 
 //	private var extraMessages: [Int: ChatMessage] = [:]
 	private var lastReadMessageInfo: (index: Int, date: Date)? = nil
@@ -146,7 +147,6 @@ open class ChatWowViewController: UIViewController
 		tableView.backgroundColor = .white
 		tableView.separatorStyle = .none
 		tableView.keyboardDismissMode = .interactive
-		tableView.reloadData()
 
 		setupKeyboardDismissalAnimations()
 	}
@@ -155,7 +155,7 @@ open class ChatWowViewController: UIViewController
 	{
 		super.viewWillAppear(animated)
 
-		scrollToBottom(animated: false)
+		tableView.reloadData()
 	}
 
 	private func setupKeyboardDismissalAnimations()
@@ -289,6 +289,16 @@ extension ChatWowViewController // Chat interface
 		}
 	}
 
+	open func updateMessage(at index: Int)
+	{
+		guard let indexPath = indexPath(for: .normal(index)) else
+		{
+			return
+		}
+
+		tableView.reloadRows(at: [indexPath], with: .fade)
+	}
+
 	open func scrollToBottom(animated: Bool)
 	{
 		guard let indexPath = indexPath(for: .normal(0)) else { return }
@@ -367,6 +377,15 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 	func tableViewWillReloadData(_ tableView: ChatTableView)
 	{
 		reindexLastReadMessage()
+	}
+
+	func tableViewDidReloadData(_ tableView: ChatTableView)
+	{
+		if !firstLoadHappened && cachedCount > 0
+		{
+			firstLoadHappened = true
+			scrollToBottom(animated: false)
+		}
 	}
 
 	public func numberOfSections(in tableView: UITableView) -> Int

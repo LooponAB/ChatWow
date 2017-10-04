@@ -18,10 +18,16 @@ class ChatTableView: UITableView
 		}
 
 		super.reloadData()
+
+		if let chatTableDelegate = delegate as? ChatTableViewDelegate
+		{
+			chatTableDelegate.tableViewDidReloadData(self)
+		}
 	}
 }
 
 protocol ChatTableViewDelegate: UITableViewDelegate
 {
 	func tableViewWillReloadData(_ tableView: ChatTableView)
+	func tableViewDidReloadData(_ tableView: ChatTableView)
 }
