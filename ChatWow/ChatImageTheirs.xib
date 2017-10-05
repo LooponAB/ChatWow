@@ -47,6 +47,7 @@
             <connections>
                 <outlet property="chatImageView" destination="5OB-Xx-Cp1" id="1cr-pG-4tk"/>
                 <outlet property="timeLabel" destination="hQe-uA-Sdo" id="9jc-u0-015"/>
+                <outlet property="transluscentView" destination="5OB-Xx-Cp1" id="7D5-h8-dYZ"/>
             </connections>
             <point key="canvasLocation" x="7.5" y="126"/>
         </tableViewCell>

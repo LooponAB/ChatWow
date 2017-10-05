@@ -196,14 +196,11 @@ open class ChatWowViewController: UIViewController
 		NotificationCenter.default.removeObserver(self)
 	}
 
-	private func reindexLastReadMessage()
+	private func reindexedLastReadMessage() -> (index: Int, date: Date)?
 	{
-		lastReadMessageInfo = nil
-		cachedCount = dataSource?.numberOfMessages(in: self) ?? 0
-
 		guard cachedCount > 0 else
 		{
-			return
+			return nil
 		}
 
 		var lastReadInfo: (Int, Date)? = nil
@@ -219,7 +216,7 @@ open class ChatWowViewController: UIViewController
 			}
 		}
 
-		lastReadMessageInfo = lastReadInfo
+		return lastReadInfo
 	}
 }
 
@@ -276,8 +273,15 @@ extension ChatWowViewController // Chat interface
 	open func updateReadInfo()
 	{
 		let previousIndexPath = indexPath(for: .readAnnotation(Date()))
+		let newReadInfo = reindexedLastReadMessage()
 
-		reindexLastReadMessage()
+		if let indexPath = previousIndexPath, let readInfo = newReadInfo
+		{
+			// The index and dates are updated separately to prevent curruption of tableview indexPaths
+			lastReadMessageInfo?.date = readInfo.date
+			tableView.reloadRows(at: [indexPath], with: .fade)
+			lastReadMessageInfo?.index = readInfo.index
+		}
 
 		if let previousIndexPath = previousIndexPath, let newIndexPath = indexPath(for: .readAnnotation(Date()))
 		{
@@ -376,7 +380,9 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 
 	func tableViewWillReloadData(_ tableView: ChatTableView)
 	{
-		reindexLastReadMessage()
+		lastReadMessageInfo = nil
+		cachedCount = dataSource?.numberOfMessages(in: self) ?? 0
+		lastReadMessageInfo = reindexedLastReadMessage()
 	}
 
 	func tableViewDidReloadData(_ tableView: ChatTableView)
@@ -453,6 +459,8 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 			{
 				chatView.timeLabel?.text = nil
 			}
+
+			chatView.transluscentView?.alpha = chatMessage.showTransluscent ? 0.5 : 1.0
 
 			delegate?.chatController(self, prepare: chatView, for: chatMessage)
 		}

@@ -63,6 +63,7 @@
             <connections>
                 <outlet property="chatLabel" destination="QPs-h4-Q90" id="rSN-Yc-VIz"/>
                 <outlet property="timeLabel" destination="LQN-YQ-mpe" id="Lia-xM-00A"/>
+                <outlet property="transluscentView" destination="b43-Dg-68m" id="y9P-Ln-08J"/>
             </connections>
             <point key="canvasLocation" x="34.5" y="25"/>
         </view>

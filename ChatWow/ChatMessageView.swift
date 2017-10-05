@@ -15,6 +15,9 @@ public class ChatMessageView: UITableViewCell
 	@IBOutlet open var timeLabel: UILabel?
 	@IBOutlet open var chatImageView: ChatImageView?
 
+	// A view that can be made transluscent (it can be a view already attached to another IBOutlet)
+	@IBOutlet open var transluscentView: UIView?
+
 	public override var frame: CGRect
 	{
 		didSet

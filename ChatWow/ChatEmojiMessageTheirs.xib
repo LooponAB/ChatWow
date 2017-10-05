@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ChatMessageView" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ChatMessageView" customModule="ChatWow" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -45,6 +46,7 @@
             <connections>
                 <outlet property="chatLabel" destination="QPs-h4-Q90" id="7oD-3S-CZV"/>
                 <outlet property="timeLabel" destination="VHB-In-ixc" id="gWB-C7-9JQ"/>
+                <outlet property="transluscentView" destination="QPs-h4-Q90" id="J35-LQ-mp7"/>
             </connections>
             <point key="canvasLocation" x="34.5" y="25"/>
         </view>

@@ -13,6 +13,7 @@ public protocol ChatMessage
 	var side: InterlocutorSide { get }
 	var date: Date { get }
 	var showTimestamp: Bool { get }
+	var showTransluscent: Bool { get }
 
 	var viewIdentifier: String { get }
 }
@@ -29,13 +30,15 @@ open class ChatTextMessage: ChatMessage
 	public var side: InterlocutorSide
 	public var date: Date
 	public var showTimestamp: Bool
+	public var showTransluscent: Bool = false
 
-	public init(text: String, side: InterlocutorSide, date: Date, showTimestamp: Bool = true)
+	public init(text: String, side: InterlocutorSide, date: Date, showTimestamp: Bool = true, showTransluscent: Bool = false)
 	{
 		self.text = text
 		self.side = side
 		self.date = date
 		self.showTimestamp = showTimestamp
+		self.showTransluscent = showTransluscent
 	}
 
 	var useBigEmoji: Bool
@@ -71,6 +74,7 @@ open class ChatImageMessage: ChatMessage
 	public var date: Date
 	public var image: UIImage
 	public var showTimestamp: Bool
+	public var showTransluscent: Bool = false
 
 	public init(image: UIImage, side: InterlocutorSide, date: Date, showTimestamp: Bool = true)
 	{
