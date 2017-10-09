@@ -241,6 +241,9 @@ extension ChatWowViewController: ChatKeyboardHelperViewDelegate
 
 extension ChatWowViewController // Chat interface
 {
+	/// Informs the chat controller that new messages have been added to the data source, and that they should be appended to the chat
+	/// history. Make sure the data source will return the **new** message count when this method is called, as it will automatically
+	/// deal with the message count offset.
 	open func insertMessages(newMessages count: Int, scrollToBottom: Bool = false)
 	{
 		guard let total = dataSource?.numberOfMessages(in: self) else
@@ -270,6 +273,8 @@ extension ChatWowViewController // Chat interface
 		}
 	}
 
+	/// Informs the chat controller that the last read message has changed. This will cause the chat controller to look for the most
+	/// recently message again and then to move the "chat read" label to the appropriate position in the chat log.
 	open func updateReadInfo()
 	{
 		let previousIndexPath = indexPath(for: .readAnnotation(Date()))
@@ -293,6 +298,8 @@ extension ChatWowViewController // Chat interface
 		}
 	}
 
+	/// Informs the chat controller that the message at a certain index has been updated for whatever reason. This will cause the
+	/// controller to update the contents of that message on the chat log.
 	open func updateMessage(at index: Int)
 	{
 		guard let indexPath = indexPath(for: .normal(index)) else
@@ -303,6 +310,7 @@ extension ChatWowViewController // Chat interface
 		tableView.reloadRows(at: [indexPath], with: .fade)
 	}
 
+	/// Causes the chat view to scroll to the bottom of the chat log, thus displaying the most recent messages.
 	open func scrollToBottom(animated: Bool)
 	{
 		guard let indexPath = indexPath(for: .normal(0)) else { return }
