@@ -256,9 +256,9 @@ extension ChatWowViewController // Chat interface
 
 		var indexPaths = [IndexPath]()
 
-		for i in total - count - index ..< total
+		for i in total - count ..< total
 		{
-			indexPaths.append(IndexPath(row: i + (lastReadMessageInfo != nil ? 1 : 0), section: 0))
+			indexPaths.append(IndexPath(row: i + (lastReadMessageInfo != nil ? 1 : 0) - index, section: 0))
 		}
 
 		if let readInfo = lastReadMessageInfo
