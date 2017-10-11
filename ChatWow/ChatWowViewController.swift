@@ -19,6 +19,13 @@ public protocol ChatWowDataSource: class
 
 	/// The read time stamp for the message. Return `nil` if the message has not yet been read.
 	func chatController(_ chatController: ChatWowViewController, readDateForMessageWith index: Int) -> Date?
+
+	/// Total number of pending messages to be displayed.
+	func numberOfPendingMessages(in chatController: ChatWowViewController) -> Int
+
+	/// The pending message to be displayed at a certain position from the bottom of the view.
+	/// Please notice all "pending" messages appear below all "normal" messages.
+	func chatController(_ chatController: ChatWowViewController, pendingChatMessageWith index: Int) -> ChatMessage
 }
 
 public protocol ChatWowDelegate: class
@@ -33,6 +40,7 @@ public protocol ChatWowDelegate: class
 open class ChatWowViewController: UIViewController
 {
 	private var cachedCount: Int = 0
+	private var cachedPendingCount: Int = 0
 	private var bottomConstraint: NSLayoutConstraint? = nil
 	private let _inputController: ChatInputViewController = ChatInputViewController.make()
 	private var firstLoadHappened = false
@@ -52,7 +60,7 @@ open class ChatWowViewController: UIViewController
 	/// The table view used to render the chat. Don't call `reloadSections(_:with:)` or `reloadRows(at:with:)`, as those are disabled.
 	open let tableView: UITableView = ChatTableView(frame: CGRect(x: 0, y: 0, width: 320, height: 240), style: .plain)
 
-	open lazy var readDateFormatter: DateFormatter =
+	private lazy var readDateFormatter: DateFormatter =
 		{
 			let formatter = DateFormatter()
 			formatter.dateStyle = .short
@@ -60,7 +68,7 @@ open class ChatWowViewController: UIViewController
 			return formatter
 		}()
 
-	open lazy var messageDateFormatter: DateFormatter =
+	private lazy var messageDateFormatter: DateFormatter =
 		{
 			let formatter = DateFormatter()
 			formatter.dateStyle = .none
@@ -68,7 +76,7 @@ open class ChatWowViewController: UIViewController
 			return formatter
 		}()
 
-	var keyboardSpacerConstraint: NSLayoutConstraint?
+	private var keyboardSpacerConstraint: NSLayoutConstraint?
 	{
 		return bottomConstraint
 	}
@@ -76,11 +84,6 @@ open class ChatWowViewController: UIViewController
 	open var inputController: ChatInputViewController
 	{
 		return _inputController
-	}
-
-	open func clearInput()
-	{
-		inputController.inputField.text = ""
 	}
 
 	private lazy var defaultTextMessageCellAttributes: [NSAttributedStringKey: Any] =
@@ -244,7 +247,7 @@ extension ChatWowViewController // Chat interface
 	/// Informs the chat controller that new messages have been added to the data source, and that they should be appended to the chat
 	/// history. Make sure the data source will return the **new** message count when this method is called, as it will automatically
 	/// deal with the message count offset.
-	open func insertMessages(newMessages count: Int, scrollToBottom: Bool = false)
+	open func insertMessages(newMessages count: Int, at index: Int = 0, scrollToBottom: Bool = false)
 	{
 		guard let total = dataSource?.numberOfMessages(in: self) else
 		{
@@ -253,7 +256,7 @@ extension ChatWowViewController // Chat interface
 
 		var indexPaths = [IndexPath]()
 
-		for i in total - count ..< total
+		for i in total - count - index ..< total
 		{
 			indexPaths.append(IndexPath(row: i + (lastReadMessageInfo != nil ? 1 : 0), section: 0))
 		}
@@ -271,6 +274,68 @@ extension ChatWowViewController // Chat interface
 				self.scrollToBottom(animated: true)
 			})
 		}
+	}
+
+	/// Inserts a new pending message. Pending messages are displayed with a reduced opacity compared to "normal" messages, and always
+	/// below them in the chat log. Make sure the data source will return the **new** message count when this method is called, as it will
+	/// automatically deal with the message count offset.
+	open func insertPendingMessages(newMessages count: Int, scrollToBottom: Bool = false)
+	{
+		guard let total = dataSource?.numberOfPendingMessages(in: self) else
+		{
+			return
+		}
+
+		var indexPaths = [IndexPath]()
+
+		for i in total - count ..< total
+		{
+			indexPaths.append(IndexPath(row: i, section: 1))
+		}
+
+		tableView.insertRows(at: indexPaths, with: .bottom)
+
+		if scrollToBottom
+		{
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+				self.scrollToBottom(animated: true)
+			})
+		}
+	}
+
+	/// Moves a pending message identified by `pendingIndex` to the normal chat log, and inserts it at `index`. Make sure all data source
+	/// methods return the "new" values upon calling this method, as if ther message has already been moved in the data source.
+	open func commitPendingMessage(with pendingIndex: Int, to index: Int)
+	{
+		guard let dataSource = self.dataSource else
+		{
+			return
+		}
+
+		cachedCount = dataSource.numberOfMessages(in: self)
+
+		if let readInfo = lastReadMessageInfo
+		{
+			lastReadMessageInfo = (index: readInfo.index + 1, date: readInfo.date)
+		}
+
+		guard
+			let pendingIndexPath = indexPath(for: .pending(pendingIndex)),
+			let messageIndexPath = indexPath(for: .normal(index))
+		else
+		{
+			print("Bad configuration: can't move pending message!")
+			return
+		}
+
+		cachedPendingCount = dataSource.numberOfPendingMessages(in: self)
+
+		tableView.moveRow(at: pendingIndexPath, to: messageIndexPath)
+
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.35)
+			{
+				self.tableView.reloadRows(at: [messageIndexPath], with: .fade)
+			}
 	}
 
 	/// Informs the chat controller that the last read message has changed. This will cause the chat controller to look for the most
@@ -310,11 +375,35 @@ extension ChatWowViewController // Chat interface
 		tableView.reloadRows(at: [indexPath], with: .fade)
 	}
 
+	/// Informs the chat controller that the pending message at a certain index has been updated for whatever reason. This will cause the
+	/// controller to update the contents of that message on the chat log.
+	open func updatePendingMessage(at index: Int)
+	{
+		guard let indexPath = indexPath(for: .pending(index)) else
+		{
+			return
+		}
+
+		tableView.reloadRows(at: [indexPath], with: .fade)
+	}
+
 	/// Causes the chat view to scroll to the bottom of the chat log, thus displaying the most recent messages.
 	open func scrollToBottom(animated: Bool)
 	{
-		guard let indexPath = indexPath(for: .normal(0)) else { return }
-		tableView.scrollToRow(at: indexPath, at: .bottom, animated: animated)
+		if cachedPendingCount > 0, let indexPath = indexPath(for: .pending(0))
+		{
+			tableView.scrollToRow(at: indexPath, at: .bottom, animated: animated)
+		}
+		else if let indexPath = indexPath(for: .normal(0))
+		{
+			tableView.scrollToRow(at: indexPath, at: .bottom, animated: animated)
+		}
+	}
+
+	/// Clears the input field contents.
+	open func clearInput()
+	{
+		inputController.inputField.text = ""
 	}
 }
 
@@ -322,6 +411,7 @@ internal enum MessageIndex
 {
 	case normal(Int)
 	case readAnnotation(Date)
+	case pending(Int)
 }
 
 extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
@@ -331,7 +421,11 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 	/// rows generated by ChatWow that display the "read" info label.
 	private func chatMessageIndex(for indexPath: IndexPath) -> MessageIndex
 	{
-		if let lastReadInfo = lastReadMessageInfo
+		if indexPath.section == 1
+		{
+			return .pending(cachedPendingCount - indexPath.row - 1)
+		}
+		else if let lastReadInfo = lastReadMessageInfo
 		{
 			let row = cachedCount - indexPath.row
 
@@ -374,6 +468,17 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 				return nil
 			}
 
+		case .pending(let index):
+			let row = cachedPendingCount - index
+			if row > 0
+			{
+				return IndexPath(row: row - 1, section: 1)
+			}
+			else
+			{
+				return nil
+			}
+
 		case .readAnnotation(_):
 			if let annotationIndex = lastReadMessageInfo?.index
 			{
@@ -404,13 +509,21 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 
 	public func numberOfSections(in tableView: UITableView) -> Int
 	{
-		return 1
+		return 2
 	}
 
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
-		cachedCount = dataSource?.numberOfMessages(in: self) ?? 0
-		return cachedCount + (lastReadMessageInfo != nil ? 1 : 0)
+		if section == 0
+		{
+			cachedCount = dataSource?.numberOfMessages(in: self) ?? 0
+			return cachedCount + (lastReadMessageInfo != nil ? 1 : 0)
+		}
+		else
+		{
+			cachedPendingCount = dataSource?.numberOfPendingMessages(in: self) ?? 0
+			return cachedPendingCount
+		}
 	}
 
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -422,15 +535,22 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 
 		let chatIndex = chatMessageIndex(for: indexPath)
 		let chatMessage: ChatMessage
+		let transluscent: Bool
 
 		switch chatIndex
 		{
 		case .readAnnotation(let date):
 			let readLabel = String(format: NSLocalizedString("Read %@", comment: ""), readDateFormatter.string(from: date))
 			chatMessage = ChatReadAnnotationMessage(text: readLabel, side: .mine, date: date)
+			transluscent = false
 
 		case .normal(let index):
 			chatMessage = dataSource.chatController(self, chatMessageWith: index)
+			transluscent = false
+
+		case .pending(let index):
+			chatMessage = dataSource.chatController(self, pendingChatMessageWith: index)
+			transluscent = true
 		}
 
 		let cell = tableView.dequeueReusableCell(withIdentifier: chatMessage.viewIdentifier, for: indexPath)
@@ -468,7 +588,7 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 				chatView.timeLabel?.text = nil
 			}
 
-			chatView.transluscentView?.alpha = chatMessage.showTransluscent ? 0.5 : 1.0
+			chatView.transluscentView?.alpha = transluscent ? 0.5 : 1.0
 
 			delegate?.chatController(self, prepare: chatView, for: chatMessage)
 		}
@@ -495,6 +615,9 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 
 		case .normal(let index):
 			chatMessage = dataSource.chatController(self, chatMessageWith: index)
+
+		case .pending(let index):
+			chatMessage = dataSource.chatController(self, pendingChatMessageWith: index)
 		}
 
 		if let textMessage = chatMessage as? ChatTextMessage
