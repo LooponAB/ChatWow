@@ -65,7 +65,7 @@ class ChatViewController: ChatWowViewController
 			return
 		}
 
-		insertMessages(newMessages: 1, scrollToBottom: true)
+		insert(newMessages: 1, scrollToBottom: true)
 
 		DispatchQueue.main.asyncAfter(deadline: .now() + 2.5)
 			{
@@ -99,7 +99,7 @@ extension ChatViewController: ChatWowDelegate
 		guard message != "" else { return }
 
 		chats.insert(ChatTextMessage(text: message, side: .mine, date: Date()), at: 0)
-		insertMessages(newMessages: 1, scrollToBottom: true)
+		insert(newMessages: 1, scrollToBottom: true)
 		clearInput()
 	}
 

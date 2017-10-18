@@ -247,7 +247,7 @@ extension ChatWowViewController // Chat interface
 	/// Informs the chat controller that new messages have been added to the data source, and that they should be appended to the chat
 	/// history. Make sure the data source will return the **new** message count when this method is called, as it will automatically
 	/// deal with the message count offset.
-	open func insertMessages(newMessages count: Int, at index: Int = 0, scrollToBottom: Bool = false)
+	open func insert(newMessages count: Int, at index: Int = 0, scrollToBottom: Bool = false, animation: UITableViewRowAnimation = .left)
 	{
 		guard let total = dataSource?.numberOfMessages(in: self) else
 		{
@@ -266,7 +266,7 @@ extension ChatWowViewController // Chat interface
 			lastReadMessageInfo = (index: readInfo.index + count, date: readInfo.date)
 		}
 
-		tableView.insertRows(at: indexPaths, with: .left)
+		tableView.insertRows(at: indexPaths, with: animation)
 
 		if scrollToBottom
 		{
@@ -279,7 +279,7 @@ extension ChatWowViewController // Chat interface
 	/// Inserts a new pending message. Pending messages are displayed with a reduced opacity compared to "normal" messages, and always
 	/// below them in the chat log. Make sure the data source will return the **new** message count when this method is called, as it will
 	/// automatically deal with the message count offset.
-	open func insertPendingMessages(newMessages count: Int, scrollToBottom: Bool = false)
+	open func insert(pendingMessages count: Int, scrollToBottom: Bool = false, animation: UITableViewRowAnimation = .bottom)
 	{
 		guard let total = dataSource?.numberOfPendingMessages(in: self) else
 		{
@@ -293,7 +293,7 @@ extension ChatWowViewController // Chat interface
 			indexPaths.append(IndexPath(row: i, section: 1))
 		}
 
-		tableView.insertRows(at: indexPaths, with: .bottom)
+		tableView.insertRows(at: indexPaths, with: animation)
 
 		if scrollToBottom
 		{
@@ -303,8 +303,28 @@ extension ChatWowViewController // Chat interface
 		}
 	}
 
+	/// Removes a message from the chat log. Make sure all data source methods return the "new" values upon calling this method,
+	/// as if the message has already been removed in the data source.
+	open func remove(messageAt index: Int)
+	{
+		if let indexPath = indexPath(for: .normal(index))
+		{
+			tableView.deleteRows(at: [indexPath], with: .fade)
+		}
+	}
+
+	/// Removes a pending message from the chat log. Make sure all data source methods return the "new" values upon calling this method,
+	/// as if the message has already been removed in the data source.
+	open func remove(pendingMessageAt index: Int)
+	{
+		if let indexPath = indexPath(for: .pending(index))
+		{
+			tableView.deleteRows(at: [indexPath], with: .fade)
+		}
+	}
+
 	/// Moves a pending message identified by `pendingIndex` to the normal chat log, and inserts it at `index`. Make sure all data source
-	/// methods return the "new" values upon calling this method, as if ther message has already been moved in the data source.
+	/// methods return the "new" values upon calling this method, as if the message has already been moved in the data source.
 	open func commitPendingMessage(with pendingIndex: Int, to index: Int)
 	{
 		guard let dataSource = self.dataSource else
