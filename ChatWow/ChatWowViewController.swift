@@ -34,7 +34,13 @@ public protocol ChatWowDelegate: class
 	func chatController(_ chatController: ChatWowViewController, prepare cellView: ChatMessageView, for message: ChatMessage)
 
 	/// Called when the user taps the "send" button, or taps/presses the return key on the keyboard.
-	func chatController(_ chatController: ChatWowViewController, userDidInsertMessage message: String)
+	func chatController(_ chatController: ChatWowViewController, didInsertMessage message: String)
+
+	/// Called when the user taps a message in the chat log.
+	func chatController(_ chatController: ChatWowViewController, didTapMessageWith index: Int)
+
+	/// Called when the user taps a pending message in the chat log.
+	func chatController(_ chatController: ChatWowViewController, didTapPendingMessageWith index: Int)
 }
 
 open class ChatWowViewController: UIViewController
@@ -227,7 +233,7 @@ extension ChatWowViewController: ChatInputViewControllerDelegate
 {
 	public func userDidSendMessage(_ message: String)
 	{
-		delegate?.chatController(self, userDidInsertMessage: message)
+		delegate?.chatController(self, didInsertMessage: message)
 	}
 }
 
@@ -610,6 +616,15 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 
 			chatView.transluscentView?.alpha = transluscent ? 0.5 : 1.0
 
+			if chatMessage.hasError
+			{
+				chatView.hasError = true
+			}
+			else
+			{
+				chatView.hasError = false
+			}
+
 			delegate?.chatController(self, prepare: chatView, for: chatMessage)
 		}
 
@@ -669,6 +684,26 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 		else
 		{
 			return UITableViewAutomaticDimension
+		}
+	}
+
+	public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+	{
+		guard let delegate = self.delegate else
+		{
+			return
+		}
+
+		switch chatMessageIndex(for: indexPath)
+		{
+		case .normal(let index):
+			delegate.chatController(self, didTapMessageWith: index)
+
+		case .pending(let index):
+			delegate.chatController(self, didTapPendingMessageWith: index)
+
+		default:
+			break
 		}
 	}
 }

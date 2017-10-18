@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="12:34 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQe-uA-Sdo">
-                        <rect key="frame" x="20" y="98" width="54" height="13.5"/>
+                        <rect key="frame" x="20" y="98" width="86" height="13.5"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="54" id="kaw-v6-hUS"/>
                         </constraints>
@@ -28,7 +28,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="5OB-Xx-Cp1" customClass="ChatImageView" customModule="ChatWow" customModuleProvider="target">
-                        <rect key="frame" x="82" y="4" width="289" height="111.5"/>
+                        <rect key="frame" x="114" y="4" width="257" height="111.5"/>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="error" translatesAutoresizingMaskIntoConstraints="NO" id="aeC-Yf-bvM">
+                        <rect key="frame" x="371" y="49" width="0.0" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" id="dlg-c9-vWC"/>
+                        </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
@@ -36,16 +42,23 @@
                     <constraint firstItem="5OB-Xx-Cp1" firstAttribute="top" secondItem="uLO-1c-ll5" secondAttribute="top" constant="4" id="IBq-ql-kvR"/>
                     <constraint firstItem="hQe-uA-Sdo" firstAttribute="leading" secondItem="uLO-1c-ll5" secondAttribute="leading" constant="20" id="KpX-qw-3AL"/>
                     <constraint firstItem="5OB-Xx-Cp1" firstAttribute="leading" secondItem="hQe-uA-Sdo" secondAttribute="trailing" constant="8" id="Q1x-Me-iOk"/>
+                    <constraint firstItem="aeC-Yf-bvM" firstAttribute="leading" secondItem="5OB-Xx-Cp1" secondAttribute="trailing" id="Qe7-e2-kxx"/>
                     <constraint firstAttribute="bottom" secondItem="hQe-uA-Sdo" secondAttribute="bottom" constant="8" id="YKa-cM-ls8"/>
-                    <constraint firstAttribute="trailing" secondItem="5OB-Xx-Cp1" secondAttribute="trailing" constant="4" id="fzz-Vz-MaF"/>
+                    <constraint firstItem="aeC-Yf-bvM" firstAttribute="centerY" secondItem="uLO-1c-ll5" secondAttribute="centerY" id="loY-Y0-edC"/>
+                    <constraint firstAttribute="trailing" secondItem="aeC-Yf-bvM" secondAttribute="trailing" constant="4" id="si9-b5-LHT"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="chatImageView" destination="5OB-Xx-Cp1" id="1cr-pG-4tk"/>
+                <outlet property="errorImageConstraint" destination="dlg-c9-vWC" id="dpS-fk-UCX"/>
+                <outlet property="errorImageView" destination="aeC-Yf-bvM" id="u7x-GU-opf"/>
                 <outlet property="timeLabel" destination="hQe-uA-Sdo" id="9jc-u0-015"/>
                 <outlet property="transluscentView" destination="5OB-Xx-Cp1" id="XmZ-b9-vlJ"/>
             </connections>
             <point key="canvasLocation" x="-17.5" y="115"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="error" width="20" height="20"/>
+    </resources>
 </document>

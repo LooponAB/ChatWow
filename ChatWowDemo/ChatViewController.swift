@@ -94,7 +94,7 @@ extension ChatViewController: ChatWowDataSource
 
 extension ChatViewController: ChatWowDelegate
 {
-	func chatController(_ chatController: ChatWowViewController, userDidInsertMessage message: String)
+	func chatController(_ chatController: ChatWowViewController, didInsertMessage message: String)
 	{
 		guard message != "" else { return }
 
