@@ -47,12 +47,15 @@ open class ChatWowViewController: UIViewController
 {
 	private var cachedCount: Int = 0
 	private var cachedPendingCount: Int = 0
-	private var bottomConstraint: NSLayoutConstraint? = nil
 	private let _inputController: ChatInputViewController = ChatInputViewController.make()
 	private var firstLoadHappened = false
 
 //	private var extraMessages: [Int: ChatMessage] = [:]
 	private var lastReadMessageInfo: (index: Int, date: Date)? = nil
+
+	// Constraints
+	private var bottomConstraint: NSLayoutConstraint? = nil
+	private var bottomSafeAreaConstraint: NSLayoutConstraint? = nil
 
 	open weak var dataSource: ChatWowDataSource? = nil
 	open weak var delegate: ChatWowDelegate? = nil
@@ -136,6 +139,17 @@ open class ChatWowViewController: UIViewController
 
 		tableView.bottomAnchor.constraint(equalTo: inputController.view.bottomAnchor).isActive = true
 
+		if #available(iOS 11.0, *)
+		{
+			let safeAreaBottom = view.safeAreaLayoutGuide.bottomAnchor
+			bottomSafeAreaConstraint = safeAreaBottom.constraint(equalTo: inputController.inputField.bottomAnchor, constant: 5)
+			bottomSafeAreaConstraint?.isActive = true
+		}
+		else
+		{
+			inputController.view.bottomAnchor.constraint(equalTo: inputController.inputField.bottomAnchor, constant: 5).isActive = true
+		}
+
 		bottomConstraint = view.bottomAnchor.constraint(equalTo: inputController.view.bottomAnchor)
 		bottomConstraint?.isActive = true
 
@@ -191,6 +205,24 @@ open class ChatWowViewController: UIViewController
 		let moveUp = notification.name == .UIKeyboardWillShow
 
 		bottomConstraint.constant = moveUp ? keyboardHeight : 0
+
+		if #available(iOS 11.0, *)
+		{
+			bottomSafeAreaConstraint?.isActive = false
+
+			if moveUp
+			{
+				let bottomAnchor = inputController.view.bottomAnchor
+				bottomSafeAreaConstraint = bottomAnchor.constraint(equalTo: inputController.inputField.bottomAnchor, constant: 5)
+			}
+			else
+			{
+				let safeAreaBottom = view.safeAreaLayoutGuide.bottomAnchor
+				bottomSafeAreaConstraint = safeAreaBottom.constraint(equalTo: inputController.inputField.bottomAnchor, constant: 5)
+			}
+
+			bottomSafeAreaConstraint?.isActive = true
+		}
 
 		let options = UIViewAnimationOptions(rawValue: curve << 16)
 		UIView.animate(withDuration: duration, delay: 0, options: options, animations:
