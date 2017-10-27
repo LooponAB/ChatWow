@@ -317,6 +317,8 @@ extension ChatWowViewController // Chat interface
 				self.scrollToBottom(animated: true)
 			})
 		}
+
+		cachedCount = total
 	}
 
 	/// Inserts a new pending message. Pending messages are displayed with a reduced opacity compared to "normal" messages, and always
@@ -344,6 +346,8 @@ extension ChatWowViewController // Chat interface
 				self.scrollToBottom(animated: true)
 			})
 		}
+
+		cachedPendingCount = total
 	}
 
 	/// Removes a message from the chat log. Make sure all data source methods return the "new" values upon calling this method,
