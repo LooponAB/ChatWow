@@ -204,16 +204,17 @@ open class ChatWowViewController: UIViewController
 		let curve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! UInt
 		let moveUp = notification.name == .UIKeyboardWillShow
 
-		bottomConstraint.constant = moveUp ? keyboardHeight : 0
-
 		if #available(iOS 11.0, *)
 		{
+			bottomConstraint.constant = moveUp ? keyboardHeight : 0
+
 			bottomSafeAreaConstraint?.isActive = false
 
 			if moveUp
 			{
 				let bottomAnchor = inputController.view.bottomAnchor
-				bottomSafeAreaConstraint = bottomAnchor.constraint(equalTo: inputController.inputField.bottomAnchor, constant: 5)
+				let constant = (keyboardHeight == 0 ? view.safeAreaInsets.bottom : 0) + 5
+				bottomSafeAreaConstraint = bottomAnchor.constraint(equalTo: inputController.inputField.bottomAnchor, constant: constant)
 			}
 			else
 			{
@@ -222,6 +223,10 @@ open class ChatWowViewController: UIViewController
 			}
 
 			bottomSafeAreaConstraint?.isActive = true
+		}
+		else
+		{
+			bottomConstraint.constant = moveUp ? keyboardHeight : 0
 		}
 
 		let options = UIViewAnimationOptions(rawValue: curve << 16)
