@@ -41,6 +41,9 @@ public protocol ChatWowDelegate: class
 
 	/// Called when the user taps a pending message in the chat log.
 	func chatController(_ chatController: ChatWowViewController, didTapPendingMessageWith index: Int)
+
+	/// Lets the delegate calculate the estimated height for a custom message bubble type. Return nil for automatic calculation.
+	func chatController(_ chatController: ChatWowViewController, estimatedHeightForMessageWith index: Int) -> CGFloat?
 }
 
 open class ChatWowViewController: UIViewController
@@ -676,7 +679,7 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 	// Tries to estimate the cell height only for cell types whose behavior we can predict.
 	public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat
 	{
-		guard let dataSource = self.dataSource else
+		guard let dataSource = self.dataSource, let delegate = self.delegate else
 		{
 			return UITableViewAutomaticDimension
 		}
@@ -691,6 +694,13 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 			return 24.0
 
 		case .normal(let index):
+			// Give a chance for the delegate to calculate heights of any custom message cells.
+			if let delegateHeight = delegate.chatController(self, estimatedHeightForMessageWith: index)
+			{
+				return delegateHeight
+			}
+
+			// Otherwise keep on going with our logic.
 			chatMessage = dataSource.chatController(self, chatMessageWith: index)
 
 		case .pending(let index):
