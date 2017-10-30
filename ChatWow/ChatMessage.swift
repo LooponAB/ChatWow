@@ -46,7 +46,7 @@ open class ChatTextMessage: ChatMessage
 		return text.isPureEmoji
 	}
 
-	public var viewIdentifier: String
+	open var viewIdentifier: String
 	{
 		// This is bad but oh well 😔
 		if useBigEmoji
@@ -62,7 +62,7 @@ open class ChatTextMessage: ChatMessage
 
 open class ChatAnnotationMessage: ChatTextMessage
 {
-	public override var viewIdentifier: String
+	open override var viewIdentifier: String
 	{
 		return "chat_default_info_with_time"
 	}
@@ -84,7 +84,7 @@ open class ChatImageMessage: ChatMessage
 		self.showTimestamp = showTimestamp
 	}
 
-	public var viewIdentifier: String
+	open var viewIdentifier: String
 	{
 		return side == .mine ? "chat_default_image_mine" : "chat_default_image_theirs"
 	}

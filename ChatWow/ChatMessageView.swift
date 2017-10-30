@@ -9,7 +9,7 @@
 import UIKit
 
 /// The view used for each individual chat message.
-public class ChatMessageView: UITableViewCell
+open class ChatMessageView: UITableViewCell
 {
 	static let kErrorImageViewWidth: CGFloat = 32
 
@@ -30,7 +30,7 @@ public class ChatMessageView: UITableViewCell
 		}
 	}
 
-	public override var frame: CGRect
+	open override var frame: CGRect
 	{
 		didSet
 		{
