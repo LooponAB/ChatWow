@@ -251,7 +251,7 @@ open class ChatWowViewController: UIViewController
 
 		var lastReadInfo: (Int, Date)? = nil
 
-		for index in (0..<cachedCount).reversed()
+		for index in 0..<cachedCount
 		{
 			if let message = dataSource?.chatController(self, chatMessageWith: index),
 			   !(message is ChatAnnotationMessage),
@@ -259,6 +259,7 @@ open class ChatWowViewController: UIViewController
 			   let readDate = dataSource?.chatController(self, readDateForMessageWith: index)
 			{
 				lastReadInfo = (index, readDate)
+				break
 			}
 		}
 
