@@ -292,7 +292,7 @@ extension ChatWowViewController // Chat interface
 	/// deal with the message count offset.
 	open func insert(newMessages count: Int, at index: Int = 0, scrollToBottom: Bool = false, animation: UITableViewRowAnimation = .left)
 	{
-		guard let total = dataSource?.numberOfMessages(in: self) else
+		guard count > 0, let total = dataSource?.numberOfMessages(in: self) else
 		{
 			return
 		}
@@ -326,7 +326,7 @@ extension ChatWowViewController // Chat interface
 	/// automatically deal with the message count offset.
 	open func insert(pendingMessages count: Int, scrollToBottom: Bool = false, animation: UITableViewRowAnimation = .bottom)
 	{
-		guard let total = dataSource?.numberOfPendingMessages(in: self) else
+		guard count > 0, let total = dataSource?.numberOfPendingMessages(in: self) else
 		{
 			return
 		}
