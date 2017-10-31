@@ -745,7 +745,6 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 			{
 				let size = (textMessage.text as NSString).boundingRect(with: maxSize, options: [.usesLineFragmentOrigin, .usesFontLeading],
 				                                                       attributes: defaultTextMessageCellAttributes, context: nil).size
-				print("Height: \(size.height + 24.0)")
 				return size.height + 24.0
 			}
 		}
