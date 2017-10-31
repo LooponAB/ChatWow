@@ -98,18 +98,18 @@ open class ChatWowViewController: UIViewController
 		return _inputController
 	}
 
-	private lazy var defaultTextMessageCellAttributes: [NSAttributedStringKey: Any] =
+	public lazy var defaultTextMessageCellAttributes: [NSAttributedStringKey: Any] =
 		{
 			let paragraph = NSMutableParagraphStyle()
 			paragraph.lineBreakMode = .byWordWrapping
 
 			return [
-				.font: UIFont.systemFont(ofSize: 15.0),
+				.font: UIFont.systemFont(ofSize: 16.0),
 				.paragraphStyle: paragraph
 			]
 		}()
 
-	private lazy var defaultEmojiMessageCellAttributes: [NSAttributedStringKey: Any] =
+	public lazy var defaultEmojiMessageCellAttributes: [NSAttributedStringKey: Any] =
 		{
 			let paragraph = NSMutableParagraphStyle()
 			paragraph.lineBreakMode = .byWordWrapping
@@ -268,6 +268,31 @@ open class ChatWowViewController: UIViewController
 
 		return lastReadInfo
 	}
+
+	/// Calling this method while some table view animations are happening can cause an ugly glitch. To prevent this, call
+	/// `setNeedsUpdateReadInfo()` instead, as that method schedules this update as a CATransaction completion callback.
+	private func doUpdateReadInfo()
+	{
+		let previousIndexPath = indexPath(for: .readAnnotation(Date()))
+		let newReadInfo = reindexedLastReadMessage()
+
+		if let indexPath = previousIndexPath, let readInfo = newReadInfo
+		{
+			// The index and dates are updated separately to prevent curruption of tableview indexPaths
+			lastReadMessageInfo?.date = readInfo.date
+			tableView.reloadRows(at: [indexPath], with: .fade)
+			lastReadMessageInfo?.index = readInfo.index
+		}
+
+		if let previousIndexPath = previousIndexPath, let newIndexPath = indexPath(for: .readAnnotation(Date()))
+		{
+			tableView.moveRow(at: previousIndexPath, to: newIndexPath)
+		}
+		else if let newIndexPath = indexPath(for: .readAnnotation(Date()))
+		{
+			tableView.insertRows(at: [newIndexPath], with: .top)
+		}
+	}
 }
 
 extension ChatWowViewController: ChatInputViewControllerDelegate
@@ -390,9 +415,11 @@ extension ChatWowViewController // Chat interface
 			lastReadMessageInfo = (index: readInfo.index + 1, date: readInfo.date)
 		}
 
+		let messageIndex = MessageIndex.normal(index)
+
 		guard
 			let pendingIndexPath = indexPath(for: .pending(pendingIndex)),
-			let messageIndexPath = indexPath(for: .normal(index))
+			let messageIndexPath = indexPath(for: messageIndex)
 		else
 		{
 			print("Bad configuration: can't move pending message!")
@@ -403,35 +430,27 @@ extension ChatWowViewController // Chat interface
 
 		tableView.moveRow(at: pendingIndexPath, to: messageIndexPath)
 
+		// Wait for table view move animation
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.35)
 			{
-				self.tableView.reloadRows(at: [messageIndexPath], with: .fade)
+				[weak self] in
+
+				// Recalculate index path, as it might have changed in the meantime.
+				if let indexPath = self?.indexPath(for: messageIndex)
+				{
+					self?.tableView.reloadRows(at: [indexPath], with: .fade)
+				}
 			}
 	}
 
 	/// Informs the chat controller that the last read message has changed. This will cause the chat controller to look for the most
 	/// recently message again and then to move the "chat read" label to the appropriate position in the chat log.
-	open func updateReadInfo()
+	open func setNeedsUpdateReadInfo()
 	{
-		let previousIndexPath = indexPath(for: .readAnnotation(Date()))
-		let newReadInfo = reindexedLastReadMessage()
-
-		if let indexPath = previousIndexPath, let readInfo = newReadInfo
-		{
-			// The index and dates are updated separately to prevent curruption of tableview indexPaths
-			lastReadMessageInfo?.date = readInfo.date
-			tableView.reloadRows(at: [indexPath], with: .fade)
-			lastReadMessageInfo?.index = readInfo.index
-		}
-
-		if let previousIndexPath = previousIndexPath, let newIndexPath = indexPath(for: .readAnnotation(Date()))
-		{
-			tableView.moveRow(at: previousIndexPath, to: newIndexPath)
-		}
-		else if let newIndexPath = indexPath(for: .readAnnotation(Date()))
-		{
-			tableView.insertRows(at: [newIndexPath], with: .top)
-		}
+		CATransaction.setCompletionBlock
+			{
+				[weak self] in self?.doUpdateReadInfo()
+			}
 	}
 
 	/// Informs the chat controller that the message at a certain index has been updated for whatever reason. This will cause the
@@ -638,7 +657,7 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 			{
 				let image = imageMessage.image
 				chatView.chatImageView?.image = image
-				chatView.chatImageView?.maximumSize = image.size.aspectRect(maximumSize: tableView.maxImageInCellSize)
+				chatView.chatImageView?.maximumSize = image.size.aspectRect(maximumSize: view.maxImageInCellSize)
 			}
 
 			if chatMessage is ChatReadAnnotationMessage
@@ -709,29 +728,30 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 
 		if let textMessage = chatMessage as? ChatTextMessage
 		{
-			let maxSize = CGSize(width: tableView.bounds.width - 108.0, height: CGFloat.greatestFiniteMagnitude)
+			let maxSize = CGSize(width: view.bounds.width - 108.0, height: CGFloat.greatestFiniteMagnitude)
 
 			if textMessage is ChatAnnotationMessage
 			{
 				/// Annotation rows have a fixed height
-				return 24.0
+				return 23.5
 			}
 			else if textMessage.useBigEmoji
 			{
 				let size = (textMessage.text as NSString).boundingRect(with: maxSize, options: [.usesLineFragmentOrigin, .usesFontLeading],
 				                                                       attributes: defaultEmojiMessageCellAttributes, context: nil).size
-				return size.height
+				return size.height.rounded()
 			}
 			else
 			{
 				let size = (textMessage.text as NSString).boundingRect(with: maxSize, options: [.usesLineFragmentOrigin, .usesFontLeading],
 				                                                       attributes: defaultTextMessageCellAttributes, context: nil).size
+				print("Height: \(size.height + 24.0)")
 				return size.height + 24.0
 			}
 		}
 		else if let imageMessage = chatMessage as? ChatImageMessage
 		{
-			return imageMessage.image.size.aspectRect(maximumSize: tableView.maxImageInCellSize).height + 8.0
+			return imageMessage.image.size.aspectRect(maximumSize: view.maxImageInCellSize).height + 8.0
 		}
 		else
 		{
@@ -760,7 +780,7 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 	}
 }
 
-private extension UITableView
+private extension UIView
 {
 	var maxImageInCellSize: CGSize
 	{

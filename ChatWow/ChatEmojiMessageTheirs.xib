@@ -13,11 +13,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ChatMessageView" customModule="ChatWow" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="12:34 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VHB-In-ixc">
-                    <rect key="frame" x="106" y="20.5" width="54" height="13.5"/>
+                    <rect key="frame" x="106" y="18.5" width="54" height="13.5"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="54" id="UMj-Ba-hqz"/>
                     </constraints>
@@ -26,7 +26,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="😀🤷‍♂️" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QPs-h4-Q90">
-                    <rect key="frame" x="8" y="0.0" width="90" height="46"/>
+                    <rect key="frame" x="8" y="0.0" width="90" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="GKg-MQ-YMR"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="40"/>
                     <color key="textColor" red="0.99893993139266968" green="0.99893993139266968" blue="0.99893993139266968" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
