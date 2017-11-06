@@ -283,6 +283,10 @@ open class ChatWowViewController: UIViewController
 			tableView.reloadRows(at: [indexPath], with: .fade)
 			lastReadMessageInfo?.index = readInfo.index
 		}
+		else
+		{
+			lastReadMessageInfo = newReadInfo
+		}
 
 		if let previousIndexPath = previousIndexPath, let newIndexPath = indexPath(for: .readAnnotation(Date()))
 		{
