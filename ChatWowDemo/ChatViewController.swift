@@ -41,13 +41,14 @@ class ChatViewController: ChatWowViewController
 			"A new message",
 			"Another new message",
 			"A message",
-			"Oh hai",
+			"Let's travel! 🗽🗺",
 			"A slightly longer message so we see it wrap",
-			"A string that has emojis in it 🤔🤡",
+			"A string that has emojis in it 🤔",
 			"👽❕",
-			"💩",
-			UIImage(named: "image_1")!,
-			UIImage(named: "image_2")!
+			"🛩",
+			#imageLiteral(resourceName: "image_1"),
+			#imageLiteral(resourceName: "image_2"),
+			"🚢",
 		]
 
 		let newMessage = newMessages[Int(arc4random()) % newMessages.count]
@@ -67,10 +68,7 @@ class ChatViewController: ChatWowViewController
 
 		insert(newMessages: 1, scrollToBottom: true)
 
-		DispatchQueue.main.asyncAfter(deadline: .now() + 2.5)
-			{
-				self.updateReadInfo()
-			}
+		DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { self.setNeedsUpdateReadInfo() }
 	}
 }
 
@@ -88,7 +86,18 @@ extension ChatViewController: ChatWowDataSource
 
 	func chatController(_ chatController: ChatWowViewController, readDateForMessageWith index: Int) -> Date?
 	{
+		// Jut for demo purposes, use the timestamp of some older message, and skip the 2 most recent mssages.
 		return index < 2 ? nil : chats[4].date
+	}
+
+	func numberOfPendingMessages(in chatController: ChatWowViewController) -> Int
+	{
+		return 0
+	}
+
+	func chatController(_ chatController: ChatWowViewController, pendingChatMessageWith index: Int) -> ChatMessage
+	{
+		return ChatTextMessage(text: "Demo", side: .mine, date: Date())
 	}
 }
 
@@ -103,9 +112,25 @@ extension ChatViewController: ChatWowDelegate
 		clearInput()
 	}
 
-	func chatController(_ chatController: ChatWowViewController, prepareChatView cellView: ChatMessageView)
+	func chatController(_ chatController: ChatWowViewController, prepare cellView: ChatMessageView, for message: ChatMessage)
 	{
+		// If any custom chat views need some processing before being displayed, do it here.
+	}
 
+	func chatController(_ chatController: ChatWowViewController, didTapMessageWith index: Int)
+	{
+		// This can be used for custom behavior, like opening an imge message on full screen.
+	}
+
+	func chatController(_ chatController: ChatWowViewController, didTapPendingMessageWith index: Int)
+	{
+		// If a pending message failed sending, let the user tap it to try again, and process the tap event here.
+	}
+
+	func chatController(_ chatController: ChatWowViewController, estimatedHeightForMessageWith index: Int) -> CGFloat?
+	{
+		// If you use custom cell times, it is seriously encouraged that you estimate its height properly here.
+		return nil
 	}
 }
 

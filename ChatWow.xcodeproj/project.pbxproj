@@ -305,7 +305,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0D03D4731F7A5C99009FF81E /* Build configuration list for PBXProject "ChatWowDemo" */;
+			buildConfigurationList = 0D03D4731F7A5C99009FF81E /* Build configuration list for PBXProject "ChatWow" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -664,7 +664,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0D03D4731F7A5C99009FF81E /* Build configuration list for PBXProject "ChatWowDemo" */ = {
+		0D03D4731F7A5C99009FF81E /* Build configuration list for PBXProject "ChatWow" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0D03D4881F7A5C99009FF81E /* Debug */,
