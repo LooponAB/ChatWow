@@ -86,7 +86,7 @@ extension ChatViewController: ChatWowDataSource
 
 	func chatController(_ chatController: ChatWowViewController, readDateForMessageWith index: Int) -> Date?
 	{
-		// Jut for demo purposes, use the timestamp of some older message, and skip the 2 most recent mssages.
+		// Just for demo purposes, use the timestamp of some older message, and skip the 2 most recent mssages.
 		return index < 2 ? nil : chats[4].date
 	}
 
