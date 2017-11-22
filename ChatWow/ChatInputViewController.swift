@@ -16,6 +16,7 @@ public protocol ChatInputViewControllerDelegate: class
 open class ChatInputViewController: UIViewController
 {
 	@IBOutlet weak var inputField: ChatInputField!
+	@IBOutlet weak var sendButton: UIButton!
 
 	weak var delegate: ChatInputViewControllerDelegate? = nil
 
@@ -31,7 +32,23 @@ open class ChatInputViewController: UIViewController
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
+	/// Whether the input controller is enabled.
+	public var isEnabled: Bool
+	{
+		get { return inputField.isEnabled }
+		set
+		{
+			inputField.isEnabled = newValue
+			sendButton.isEnabled = newValue
+		}
+	}
+
+	/// Sets the placeholder string for the input text field.
+	public func setPlaceholder(_ prompt: String)
+	{
+		inputField.placeholder = prompt
+	}
 
     /*
     // MARK: - Navigation

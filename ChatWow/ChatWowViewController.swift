@@ -589,6 +589,7 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 	{
 		lastReadMessageInfo = nil
 		cachedCount = dataSource?.numberOfMessages(in: self) ?? 0
+		cachedPendingCount = dataSource?.numberOfPendingMessages(in: self) ?? 0
 		lastReadMessageInfo = reindexedLastReadMessage()
 	}
 
