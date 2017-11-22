@@ -2,7 +2,7 @@
 
 ## Chat UI library for iOS.
 
-This framework provides a clean chat log UI with a concise code interface.
+Chat UI framework for iOS. Provides all the basic UI elements necessary to implement a chat interface.
 
 ## Using ChatWowViewController
 
