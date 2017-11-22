@@ -46,7 +46,9 @@ If you need to render messages with a custom chat bubble, then you will have to:
 - Properly estimate the height of your custom view as the return value of the data source method
 `chatController:estimatedHeightForMessageWithIndex:`
 
-It is recommended to have two Nibs for each custom view, one for each "side" of the conversation, and register them with different reuse identifiers. Then you can pick which "side" to use depending on the side the chat message by returning a different reuse identifier on each case. See the implementation of `ChatImageMessage` as an example.
+It is recommended to have two Nibs for each custom view, one for each "side" of the conversation, and register them with different reuse identifiers. Then you can pick which "side" Nib to use depending on the side of the associated chat message by returning a different reuse identifier on each case. See the implementation of `ChatImageMessage` as an example.
+
+All built-in chat message views  also use this exact same registration behavior, so if your custom views are not working, have a look at the built-in views and subclasses of `ChatMessage` for a clue on how to do it.
 
 ### Failed messages
 
