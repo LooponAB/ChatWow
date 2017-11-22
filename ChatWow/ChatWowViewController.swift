@@ -67,14 +67,24 @@ public protocol ChatWowDelegate: class
 	func chatController(_ chatController: ChatWowViewController, estimatedHeightForMessageWith index: Int) -> CGFloat?
 }
 
+/// View controller that manages the presentation of a chat log. It is based on a `UITableView`, but masks (almost) all
+/// of that interface away, in favor of a much simplified message-based interface.
+///
+/// `ChatWowViewController` tries to be very simple, and thus makes very few guesses: It always assumes the data sorce
+/// is synchronized when its methods are invoked, and doesn't do any kind of message sorting.
+///
+/// What this means is that the client implementation has to do all of the work of indexing and sorting the messages.
+/// However, this is not very complicated as long as your messages can't be reordered after being inserted in the chat
+/// log. If any of this behavior is required in your implementation, then ChatWow is (currently) not suitable for your
+/// use case.
+///
+/// For instructions and more information on how to use this class, please see the README.md file.
 open class ChatWowViewController: UIViewController
 {
 	private var cachedCount: Int = 0
 	private var cachedPendingCount: Int = 0
 	private let _inputController: ChatInputViewController = ChatInputViewController.make()
 	private var firstLoadHappened = false
-
-//	private var extraMessages: [Int: ChatMessage] = [:]
 	private var lastReadMessageInfo: (index: Int, date: Date)? = nil
 
 	// Constraints
@@ -90,7 +100,8 @@ open class ChatWowViewController: UIViewController
 	/// The color used to fill the message bubbles from "our" messages.
 	open var bubbleColorMine: UIColor = #colorLiteral(red: 0.004275974818, green: 0.478739202, blue: 0.9988952279, alpha: 1)
 
-	/// The table view used to render the chat. Don't call `reloadSections(_:with:)` or `reloadRows(at:with:)`, as those are disabled.
+	/// The table view used to render the chat. Don't call `reloadSections(_:with:)` or `reloadRows(at:with:)`,
+	/// as those methods are disabled.
 	open let tableView: UITableView = ChatTableView(frame: CGRect(x: 0, y: 0, width: 320, height: 240), style: .plain)
 
 	private lazy var readDateFormatter: DateFormatter =
