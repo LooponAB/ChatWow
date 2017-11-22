@@ -22,7 +22,7 @@ You should then send the message to your server, and immediately call `insert(pe
 
 `commitPendingMessage(with: oldIndex, to: newIndex)`
 
-Where `oldIndex` is the index of the pending message (where it was in the **pending messages** stack), and `newIndex` is the index of the message after being added to the **messages** stack. `ChatWowViewController` will perform an animation giving the user the **pending message** was moved to the location of the **message**, when in reality the old view was destroyed and a new cell was created instead. This is important because it means you can render pending and normal messages with different views if you so prefer.
+Where `oldIndex` is the index of the pending message (where it was in the **pending messages** stack), and `newIndex` is the index of the message after being added to the **messages** stack. `ChatWowViewController` will perform an animation giving the user the impression that the **pending message** was moved to the location of the **message**, when in reality the old view was destroyed and a new cell was created instead. This is important because it means you can render pending and normal messages with different views if you so prefer.
 
 ### Read timestamp
 
