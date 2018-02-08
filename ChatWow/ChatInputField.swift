@@ -30,10 +30,10 @@
 import UIKit
 
 @IBDesignable
-class ChatInputField: UITextField
+public class ChatInputField: UITextField
 {
 	@IBInspectable
-	var borderRadius: CGFloat = 0.0
+	public var borderRadius: CGFloat = 0.0
 	{
 		didSet
 		{
@@ -42,7 +42,7 @@ class ChatInputField: UITextField
 	}
 
 	@IBInspectable
-	var borderWidth: CGFloat = 2.0
+	public var borderWidth: CGFloat = 2.0
 	{
 		didSet
 		{
@@ -51,7 +51,7 @@ class ChatInputField: UITextField
 	}
 
 	@IBInspectable
-	var borderColor: UIColor = .clear
+	public var borderColor: UIColor = .clear
 	{
 		didSet
 		{
@@ -59,12 +59,12 @@ class ChatInputField: UITextField
 		}
 	}
 
-	override func textRect(forBounds bounds: CGRect) -> CGRect
+	public override func textRect(forBounds bounds: CGRect) -> CGRect
 	{
 		return CGRect(x: bounds.origin.x + 12.0, y: bounds.origin.y, width: bounds.width - 26.0 - 12.0, height: bounds.height)
 	}
 
-	override func editingRect(forBounds bounds: CGRect) -> CGRect
+	public override func editingRect(forBounds bounds: CGRect) -> CGRect
 	{
 		return textRect(forBounds: bounds)
 	}

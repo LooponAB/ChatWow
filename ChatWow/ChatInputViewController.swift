@@ -41,6 +41,18 @@ open class ChatInputViewController: UIViewController
 
 	weak var delegate: ChatInputViewControllerDelegate? = nil
 
+	/// The "send" button.
+	public var button: UIButton
+	{
+		return sendButton
+	}
+
+	/// The input text field.
+	public var inputTextField: ChatInputField
+	{
+		return inputField
+	}
+
 	override open func viewDidLoad()
 	{
         super.viewDidLoad()
