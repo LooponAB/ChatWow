@@ -295,7 +295,7 @@
 					};
 					0D03D4911F7A5CB4009FF81E = {
 						CreatedOnToolsVersion = 9.0;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 					0D03D4991F7A5CB4009FF81E = {
