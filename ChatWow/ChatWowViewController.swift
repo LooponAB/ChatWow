@@ -102,7 +102,7 @@ open class ChatWowViewController: UIViewController
 
 	/// The table view used to render the chat. Don't call `reloadSections(_:with:)` or `reloadRows(at:with:)`,
 	/// as those methods are disabled.
-	open let tableView: UITableView = ChatTableView(frame: CGRect(x: 0, y: 0, width: 320, height: 240), style: .plain)
+    public let tableView: UITableView = ChatTableView(frame: CGRect(x: 0, y: 0, width: 320, height: 240), style: .plain)
 
 	private lazy var readDateFormatter: DateFormatter =
 		{
