@@ -147,6 +147,7 @@
 				0D03D4791F7A5C99009FF81E /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		0D03D4791F7A5C99009FF81E /* Products */ = {
 			isa = PBXGroup;
