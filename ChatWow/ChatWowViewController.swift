@@ -130,7 +130,7 @@ open class ChatWowViewController: UIViewController
 		return _inputController
 	}
 
-	public lazy var defaultTextMessageCellAttributes: [NSAttributedStringKey: Any] =
+	public lazy var defaultTextMessageCellAttributes: [NSAttributedString.Key: Any] =
 		{
 			let paragraph = NSMutableParagraphStyle()
 			paragraph.lineBreakMode = .byWordWrapping
@@ -141,7 +141,7 @@ open class ChatWowViewController: UIViewController
 			]
 		}()
 
-	public lazy var defaultEmojiMessageCellAttributes: [NSAttributedStringKey: Any] =
+	public lazy var defaultEmojiMessageCellAttributes: [NSAttributedString.Key: Any] =
 		{
 			let paragraph = NSMutableParagraphStyle()
 			paragraph.lineBreakMode = .byWordWrapping
@@ -219,9 +219,9 @@ open class ChatWowViewController: UIViewController
 	private func setupKeyboardDismissalAnimations()
 	{
 		NotificationCenter.default.addObserver(self, selector: #selector(ChatWowViewController.animateWithKeyboard(_:)),
-		                                       name: Notification.Name.UIKeyboardWillShow, object: nil)
+		                                       name: UIResponder.keyboardWillShowNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(ChatWowViewController.animateWithKeyboard(_:)),
-		                                       name: Notification.Name.UIKeyboardWillHide, object: nil)
+		                                       name: UIResponder.keyboardWillHideNotification, object: nil)
 
 		let helperView = ChatKeyboardHelperView(frame: CGRect(x: 0, y: 0, width: 320, height: 0))
 		helperView.delegate = self
@@ -234,10 +234,10 @@ open class ChatWowViewController: UIViewController
 		guard let bottomConstraint = self.bottomConstraint else { return }
 
 		let userInfo = notification.userInfo!
-		let keyboardHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
-		let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! Double
-		let curve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! UInt
-		let moveUp = notification.name == .UIKeyboardWillShow
+		let keyboardHeight = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
+		let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+		let curve = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
+		let moveUp = notification.name == UIResponder.keyboardWillShowNotification
 
 		if #available(iOS 11.0, *)
 		{
@@ -264,7 +264,7 @@ open class ChatWowViewController: UIViewController
 			bottomConstraint.constant = moveUp ? keyboardHeight : 0
 		}
 
-		let options = UIViewAnimationOptions(rawValue: curve << 16)
+		let options = UIView.AnimationOptions(rawValue: curve << 16)
 		UIView.animate(withDuration: duration, delay: 0, options: options, animations:
 			{
 				self.view.layoutIfNeeded()
@@ -355,7 +355,7 @@ extension ChatWowViewController // Chat interface
 	/// Informs the chat controller that new messages have been added to the data source, and that they should be appended to the chat
 	/// history. Make sure the data source will return the **new** message count when this method is called, as it will automatically
 	/// deal with the message count offset.
-	open func insert(newMessages count: Int, at index: Int = 0, scrollToBottom: Bool = false, animation: UITableViewRowAnimation = .left)
+	open func insert(newMessages count: Int, at index: Int = 0, scrollToBottom: Bool = false, animation: UITableView.RowAnimation = .left)
 	{
 		guard count > 0, let total = dataSource?.numberOfMessages(in: self) else
 		{
@@ -389,7 +389,7 @@ extension ChatWowViewController // Chat interface
 	/// Inserts a new pending message. Pending messages are displayed with a reduced opacity compared to "normal" messages, and always
 	/// below them in the chat log. Make sure the data source will return the **new** message count when this method is called, as it will
 	/// automatically deal with the message count offset.
-	open func insert(pendingMessages count: Int, scrollToBottom: Bool = false, animation: UITableViewRowAnimation = .bottom)
+	open func insert(pendingMessages count: Int, scrollToBottom: Bool = false, animation: UITableView.RowAnimation = .bottom)
 	{
 		guard count > 0, let total = dataSource?.numberOfPendingMessages(in: self) else
 		{
@@ -737,7 +737,7 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 	{
 		guard let dataSource = self.dataSource, let delegate = self.delegate else
 		{
-			return UITableViewAutomaticDimension
+			return UITableView.automaticDimension
 		}
 
 		let chatIndex = chatMessageIndex(for: indexPath)
@@ -791,7 +791,7 @@ extension ChatWowViewController: ChatTableViewDelegate, UITableViewDataSource
 		}
 		else
 		{
-			return UITableViewAutomaticDimension
+			return UITableView.automaticDimension
 		}
 	}
 
