@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,11 +14,11 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zf5-zO-EOG" id="uLO-1c-ll5">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="119.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="12:34 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQe-uA-Sdo">
-                        <rect key="frame" x="20" y="98" width="86" height="13.5"/>
+                        <rect key="frame" x="20" y="98.5" width="54" height="13.5"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="54" id="kaw-v6-hUS"/>
                         </constraints>
@@ -28,15 +27,16 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="5OB-Xx-Cp1" customClass="ChatImageView" customModule="ChatWow" customModuleProvider="target">
-                        <rect key="frame" x="114" y="4" width="257" height="111.5"/>
+                        <rect key="frame" x="82" y="4" width="289" height="112"/>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="error" translatesAutoresizingMaskIntoConstraints="NO" id="aeC-Yf-bvM">
-                        <rect key="frame" x="371" y="49" width="0.0" height="20"/>
+                        <rect key="frame" x="371" y="50" width="0.0" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" id="dlg-c9-vWC"/>
                         </constraints>
                     </imageView>
                 </subviews>
+                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="5OB-Xx-Cp1" secondAttribute="bottom" constant="4" id="C0A-tv-v00"/>
                     <constraint firstItem="5OB-Xx-Cp1" firstAttribute="top" secondItem="uLO-1c-ll5" secondAttribute="top" constant="4" id="IBq-ql-kvR"/>
@@ -48,6 +48,7 @@
                     <constraint firstAttribute="trailing" secondItem="aeC-Yf-bvM" secondAttribute="trailing" constant="4" id="si9-b5-LHT"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <connections>
                 <outlet property="chatImageView" destination="5OB-Xx-Cp1" id="1cr-pG-4tk"/>
                 <outlet property="errorImageConstraint" destination="dlg-c9-vWC" id="dpS-fk-UCX"/>
@@ -58,7 +59,15 @@
             <point key="canvasLocation" x="-17.5" y="115"/>
         </tableViewCell>
     </objects>
+    <designables>
+        <designable name="5OB-Xx-Cp1">
+            <size key="intrinsicContentSize" width="289" height="112"/>
+        </designable>
+    </designables>
     <resources>
         <image name="error" width="20" height="20"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

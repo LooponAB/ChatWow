@@ -95,7 +95,7 @@ open class ChatWowViewController: UIViewController
 	open weak var delegate: ChatWowDelegate? = nil
 
 	/// The color used to fill the message bubbles from "their" messages.
-	open var bubbleColorTheirs: UIColor = #colorLiteral(red: 0.8817413449, green: 0.8817413449, blue: 0.8817413449, alpha: 1)
+	open var bubbleColorTheirs: UIColor = .systemGray3
 
 	/// The color used to fill the message bubbles from "our" messages.
 	open var bubbleColorMine: UIColor = #colorLiteral(red: 0.004275974818, green: 0.478739202, blue: 0.9988952279, alpha: 1)
@@ -202,7 +202,7 @@ open class ChatWowViewController: UIViewController
 		tableView.register(UINib(nibName: "ChatInfoLineWithTimeCell", bundle: bundle), forCellReuseIdentifier: "chat_default_info_with_time")
 		tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: inputController.view.bounds.height + 20.0, right: 0)
 		tableView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: inputController.view.bounds.height, right: 0)
-		tableView.backgroundColor = .white
+		tableView.backgroundColor = .systemBackground
 		tableView.separatorStyle = .none
 		tableView.keyboardDismissMode = .interactive
 
